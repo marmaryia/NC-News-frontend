@@ -10,3 +10,11 @@ export function getAllArticles() {
     return articles;
   });
 }
+
+export function getArticleById(article_id) {
+  return apiClient
+    .get(`/articles/${article_id}`)
+    .then(({ data: { article } }) => {
+      return article;
+    });
+}
