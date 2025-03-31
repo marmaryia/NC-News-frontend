@@ -68,3 +68,18 @@ header ul li {
   text-align: end;
   font-style: italic;
 }
+
+.left-align-italics {
+  text-align: start;
+  font-style: italic;
+}
+
+.right-align {
+  text-align: end;
+}
+
+.comment {
+  border-bottom: solid 1px;
+
+  font-size: 1.2em;
+}
