@@ -29,7 +29,7 @@ function ArticlesList() {
             >
               <div className="title-card">
                 <h2 className="title">{article.title}</h2>
-                <p>
+                <p className="date">
                   Date: {String(new Date(article.created_at)).split("+")[0]}
                 </p>
                 <p>Topic: {article.topic}</p>

@@ -60,6 +60,10 @@ header ul li {
   grid-column-end: 3;
 }
 
+.date {
+  align-self: center;
+}
+
 .right-align-italics {
   text-align: end;
   font-style: italic;
