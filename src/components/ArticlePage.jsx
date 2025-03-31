@@ -28,25 +28,26 @@ function ArticlePage() {
     <section>
       <article>
         <h1>{article.title}</h1>
-        <p>Topic: {article.topic}</p>
+
         <img src={article.article_img_url} alt={article.title} />
-
-        <p className="left-align-italics">
-          {String(new Date(article.created_at)).split("+")[0]}
-        </p>
-
-        <p>{article.body}</p>
+        <div className="article-info">
+          <p className="left-align-italics">
+            {String(new Date(article.created_at)).split("+")[0]}
+          </p>
+          <p className="right-align-italics">Topic: {article.topic}</p>
+        </div>
+        <p className="left-align">{article.body}</p>
         <p className="right-align-italics">By: {article.author}</p>
         <p>
           📑: {article.comment_count} | ❤️: {article.votes}
         </p>
       </article>
-      <button onClick={handleShowingComments}>
+      <button className="comment-view-button" onClick={handleShowingComments}>
         {showComments ? "Hide comments" : "View comments"}
       </button>
-      <div style={{ display: showComments ? "" : "none" }}>
+      <section style={{ display: showComments ? "" : "none" }}>
         <CommentsSection article_id={article_id} />
-      </div>
+      </section>
     </section>
   );
 }
