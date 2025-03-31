@@ -12,12 +12,12 @@
 
 .logo {
   height: 6em;
-  padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
+  transition: 300ms;
+  border-radius: 5px;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  box-shadow: 0 0.5em 1em;
 }
 
 header,
@@ -29,30 +29,19 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  border: solid 1px;
-}
-
-article p {
-  font-size: 1.5em;
-}
-
-header ul {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-header ul li {
-  padding: 1em;
 }
 
 .title-card {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  border: dotted;
   margin: 2rem;
+  background-color: #797596;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.title-card:hover {
+  box-shadow: 0 0.2em 0.5em;
 }
 
 .title {
@@ -64,6 +53,16 @@ header ul li {
   align-self: center;
 }
 
+article {
+  background-color: #6c698d;
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+}
+
+article p {
+  font-size: 1.5em;
+}
 .right-align-italics {
   text-align: end;
   font-style: italic;
@@ -99,4 +98,8 @@ header ul li {
   font-size: 1.4em;
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+img {
+  max-width: 70vw;
 }

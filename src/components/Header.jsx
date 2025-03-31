@@ -6,11 +6,11 @@ function Header() {
       <Link to={"/"}>
         <img className="logo" src="/logo.png" alt="logo" />
       </Link>
-      <ul>
-        <li>Coding</li>
-        <li>Football</li>
-        <li>Cooking</li>
-      </ul>
+
+      <Link> Coding </Link>
+      <Link> Football </Link>
+      <Link> Cooking </Link>
+
       <p className="login">Logged in as</p>
     </header>
   );
