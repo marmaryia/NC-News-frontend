@@ -32,6 +32,10 @@ footer {
   border: solid 1px;
 }
 
+article p {
+  font-size: 1.5em;
+}
+
 header ul {
   list-style-type: none;
   display: flex;
@@ -54,4 +58,9 @@ header ul li {
 .title {
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+.right-align-italics {
+  text-align: end;
+  font-style: italic;
 }
