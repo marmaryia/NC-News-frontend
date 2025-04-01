@@ -1,23 +1,35 @@
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../api";
+import { useContext, useEffect } from "react";
+import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import LoginForm from "./LoginForm";
 
 function LoginPage() {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
+
+  function handleLogout() {
+    setLoggedInUser({});
+  }
 
   useEffect(() => {
-    getAllUsers().then((usersFromApi) => {
-      setUsers(usersFromApi);
-      setIsLoading(false);
-    });
-  }, []);
+    localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+  }, [loggedInUser]);
 
+  if (loggedInUser.username) {
+    return (
+      <section>
+        <h1>Logged in as</h1>
+        <h2>{loggedInUser.username}</h2>
+        <p>(aka {loggedInUser.name})</p>
+        <img src={loggedInUser.avatar_url} alt={loggedInUser.username} />
+        <br />
+        <button onClick={handleLogout}>Log out</button>
+      </section>
+    );
+  }
   return (
     <section>
       <h1>Select your today’s persona</h1>
       <div className="user-container">
-        {isLoading ? <p>Loading...</p> : <LoginForm users={users} />}
+        <LoginForm />
       </div>
     </section>
   );

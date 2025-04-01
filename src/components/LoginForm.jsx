@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
+import { getAllUsers } from "../api";
 
-function LoginForm({ users }) {
+function LoginForm() {
   const [selectedUser, setSelectedUser] = useState();
   const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   function handleChange(e) {
     if (e.target.value) {
@@ -19,8 +22,18 @@ function LoginForm({ users }) {
   }
 
   useEffect(() => {
+    setIsLoading(true);
+    getAllUsers().then((usersFromApi) => {
+      setUsers(usersFromApi);
+      setIsLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }, [loggedInUser]);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <form onChange={handleChange} onSubmit={handleSubmit}>

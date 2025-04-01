@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ArticlePage from "./components/ArticlePage";
 import LoginPage from "./components/LoginPage";
-import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Route path="/" element={<ArticlesList />} />
         <Route path="/articles/:article_id" element={<ArticlePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<UserProfile />} />
       </Routes>
 
       <Footer />

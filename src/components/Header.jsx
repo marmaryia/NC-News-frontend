@@ -14,7 +14,7 @@ function Header() {
       <Link> Football </Link>
       <Link> Cooking </Link>
 
-      <Link to={loggedInUser.username ? "/profile" : "/login"}>
+      <Link to="/login">
         <p className="login">
           {loggedInUser.username ? loggedInUser.username : "Login"}
         </p>
