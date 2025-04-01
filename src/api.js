@@ -26,3 +26,11 @@ export function getCommentsByArticleId(article_id) {
       return comments;
     });
 }
+
+export function patchLikesCount(article_id, vote) {
+  return apiClient
+    .patch(`/articles/${article_id}`, { inc_votes: vote })
+    .then(({ data: { article } }) => {
+      return article;
+    });
+}
