@@ -115,3 +115,20 @@ article p {
 img {
   max-width: 70vw;
 }
+
+.comment-body-input {
+  width: 100%;
+  padding: 1em;
+}
+
+form {
+  display: grid;
+  justify-items: start;
+}
+
+label {
+  align-self: start;
+}
+.submit-button {
+  justify-self: end;
+}
