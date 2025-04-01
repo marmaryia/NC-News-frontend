@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { postComment } from "../api";
+import { Link } from "react-router-dom";
 
 function NewCommentForm({ article_id, setCommentCount }) {
   const [commentText, setCommentText] = useState("");
@@ -24,6 +25,15 @@ function NewCommentForm({ article_id, setCommentCount }) {
       .catch(() => {
         setMessage("Something went wrong");
       });
+  }
+
+  if (!loggedInUser.username) {
+    return (
+      <p>
+        If you would like to leave your own comment, please log in{" "}
+        <Link to="/login">here</Link>
+      </p>
+    );
   }
 
   return (
