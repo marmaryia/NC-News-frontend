@@ -93,6 +93,11 @@ article p {
   gap: 1em;
 }
 
+.voting-button {
+  font-size: 1.1em;
+  background-color: #6c698d;
+}
+
 .comment {
   border-bottom: solid 1px;
   font-size: 1.2em;
