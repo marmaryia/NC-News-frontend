@@ -48,3 +48,7 @@ export function postComment(article_id, username, body) {
       return comment;
     });
 }
+
+export function deleteComment(comment_id) {
+  return apiClient.delete(`/comments/${comment_id}`);
+}
