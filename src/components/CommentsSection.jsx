@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCommentsByArticleId } from "../api";
+import NewCommentForm from "./NewCommentForm";
 
-function CommentsSection({ article_id }) {
+function CommentsSection({ article_id, commentCount, setCommentCount }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -10,7 +11,7 @@ function CommentsSection({ article_id }) {
       setComments(commentsFromApi);
       setIsLoading(false);
     });
-  }, []);
+  }, [commentCount]);
 
   if (isLoading) {
     return <section className="comments-container">Loading...</section>;
@@ -18,6 +19,12 @@ function CommentsSection({ article_id }) {
 
   return (
     <section className="comments-container">
+      {
+        <NewCommentForm
+          article_id={article_id}
+          setCommentCount={setCommentCount}
+        />
+      }
       {comments.map((comment) => {
         return (
           <div className="comment" key={comment.comment_id}>
