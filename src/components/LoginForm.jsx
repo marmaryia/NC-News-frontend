@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 
 function LoginForm({ users }) {
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedUser, setSelectedUser] = useState();
   const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
 
   function handleChange(e) {
@@ -13,12 +13,9 @@ function LoginForm({ users }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    users.forEach((user) => {
-      if (user.username === selectedUser) {
-        setLoggedInUser(user);
-      }
-    });
+    if (selectedUser) {
+      setLoggedInUser(users[selectedUser]);
+    }
   }
 
   useEffect(() => {
@@ -30,9 +27,9 @@ function LoginForm({ users }) {
       <label htmlFor="username"></label>
       <select id="username">
         <option key="empty"> </option>
-        {users.map((user) => {
+        {users.map((user, i) => {
           return (
-            <option key={user.username} value={user.username}>
+            <option key={user.username} value={i}>
               {user.username}
             </option>
           );
