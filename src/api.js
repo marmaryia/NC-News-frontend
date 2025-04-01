@@ -34,3 +34,9 @@ export function patchLikesCount(article_id, vote) {
       return article;
     });
 }
+
+export function getAllUsers() {
+  return apiClient.get("/users").then(({ data: { users } }) => {
+    return users;
+  });
+}

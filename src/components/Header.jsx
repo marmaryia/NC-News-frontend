@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
+import { useContext } from "react";
 
 function Header() {
+  const { loggedInUser } = useContext(LoggedInUserContext);
   return (
     <header>
       <Link to={"/"}>
@@ -11,7 +14,11 @@ function Header() {
       <Link> Football </Link>
       <Link> Cooking </Link>
 
-      <p className="login">Logged in as</p>
+      <Link to={loggedInUser.username ? "/profile" : "/login"}>
+        <p className="login">
+          {loggedInUser.username ? loggedInUser.username : "Login"}
+        </p>
+      </Link>
     </header>
   );
 }
