@@ -37,7 +37,7 @@ function NewCommentForm({ article_id, setCommentCount }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="new-comment-form">
       <label htmlFor="comment-body">Enter your comment here:</label>
       <textarea
         onChange={handleChange}

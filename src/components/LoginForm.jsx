@@ -36,7 +36,11 @@ function LoginForm() {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <form onChange={handleChange} onSubmit={handleSubmit}>
+    <form
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+      className="login-form"
+    >
       <label htmlFor="username"></label>
       <select id="username">
         <option key="empty"> </option>

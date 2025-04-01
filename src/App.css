@@ -121,12 +121,25 @@ img {
   padding: 1em;
 }
 
-form {
+.new-comment-form {
   display: grid;
   justify-items: start;
 }
 
-label {
+.login-form {
+  justify-self: center;
+  display: grid;
+  width: 60%;
+  grid-template-columns: 1fr;
+  justify-content: space-around;
+  row-gap: 1em;
+}
+
+select {
+  padding: 1em;
+}
+
+.new-comment-form label {
   align-self: start;
 }
 .submit-button {
