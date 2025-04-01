@@ -12,11 +12,11 @@ function Voting({ id, setLikesCount }) {
   }
 
   return (
-    <div>
-      <button onClick={handleVote} value={1}>
+    <div className="voting-container">
+      <button className="voting-button" onClick={handleVote} value={1}>
         + 1 💜
       </button>
-      <button onClick={handleVote} value={-1}>
+      <button className="voting-button" onClick={handleVote} value={-1}>
         - 1 💜
       </button>
     </div>

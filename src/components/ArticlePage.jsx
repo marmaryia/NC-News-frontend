@@ -43,8 +43,8 @@ function ArticlePage() {
         <p>
           📑 {article.comment_count} | ❤️ {likesCount}
         </p>
-        <Voting id={article_id} setLikesCount={setLikesCount} />
       </article>
+      <Voting id={article_id} setLikesCount={setLikesCount} />
       <button className="comment-view-button" onClick={handleShowingComments}>
         {showComments ? "Hide comments" : "View comments"}
       </button>
