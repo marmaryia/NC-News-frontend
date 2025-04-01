@@ -9,13 +9,12 @@ function NewCommentForm({ article_id, setCommentCount }) {
   const { loggedInUser } = useContext(LoggedInUserContext);
 
   function handleChange(e) {
-    setMessage("");
     setCommentText(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    setMessage("Submitting your comment...");
     postComment(article_id, loggedInUser.username, commentText)
       .then(() => {
         setCommentCount((current) => current + 1);
