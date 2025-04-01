@@ -103,6 +103,10 @@ article p {
   font-size: 1.2em;
 }
 
+.comment-top-line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .comment-view-button {
   align-self: center;
   width: 100%;
@@ -144,4 +148,20 @@ select {
 }
 .submit-button {
   justify-self: end;
+}
+
+.delete-comment-button {
+  justify-self: end;
+  padding: 0.2em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-comment-button:hover {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.comment-delete-message {
+  text-align: end;
+  font-style: italic;
 }

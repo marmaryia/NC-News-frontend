@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCommentsByArticleId } from "../api";
 import NewCommentForm from "./NewCommentForm";
+import CommentCard from "./CommentCard";
 
 function CommentsSection({ article_id, commentCount, setCommentCount }) {
   const [comments, setComments] = useState([]);
@@ -27,14 +28,7 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
       }
       {comments.map((comment) => {
         return (
-          <div className="comment" key={comment.comment_id}>
-            <p className="left-align-italics">
-              {String(new Date(comment.created_at)).split("+")[0]},{" "}
-              {comment.author}:
-            </p>
-            <p className="right-align"> {comment.body}</p>
-            <p className="right-align"> ❤️ {comment.votes} </p>
-          </div>
+          <CommentCard comment={comment} setCommentCount={setCommentCount} />
         );
       })}
     </section>
