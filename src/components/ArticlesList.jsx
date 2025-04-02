@@ -10,7 +10,7 @@ function ArticlesList() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [articlesCount, setArticlesCount] = useState(0);
-  const [topicsList, setTopicsList] = useState("");
+  const [topicsList, setTopicsList] = useState([]);
   const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(searchParams.get("p") || 1);
@@ -58,9 +58,16 @@ function ArticlesList() {
     return <p>Loading...</p>;
   }
 
+  let topicDescription;
+  topicsList.forEach((topicFromList) => {
+    if (topicFromList.slug === topic) {
+      topicDescription = topicFromList.description;
+    }
+  });
+
   return (
     <section>
-      <h1>{topic ? topic : "Everything"}</h1>
+      <h1>{topic ? topicDescription : "Everything"}</h1>
       <div className="articles-nav-bar">
         <div className="articles-filter">
           <ArticlesFilter
