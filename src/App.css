@@ -170,3 +170,19 @@ select {
   justify-self: end;
   margin-right: 2em;
 }
+
+.articles-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.articles-filter {
+  margin-left: 2em;
+}
+
+#demo-simple-select {
+  width: 6em;
+}

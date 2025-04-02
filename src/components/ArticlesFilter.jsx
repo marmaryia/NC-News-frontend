@@ -19,7 +19,7 @@ export default function ArticlesFilter({
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
-    if (!topic) {
+    if (topic === "Everything") {
       newParams.delete("topic");
     } else {
       newParams.set("topic", topic);
@@ -30,8 +30,8 @@ export default function ArticlesFilter({
   if (topicsAreLoading) return <div>Loading...</div>;
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl size="small">
+    <Box sx={{ width: 120 }}>
+      <FormControl>
         <InputLabel id="demo-simple-select-label">Topic</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -40,7 +40,7 @@ export default function ArticlesFilter({
           label="Topic"
           onChange={handleChange}
         >
-          <MenuItem value="">Everything</MenuItem>
+          <MenuItem value="Everything">Everything</MenuItem>
           {topicsList.map((topicObj) => {
             return (
               <MenuItem key={topicObj.slug} value={topicObj.slug}>

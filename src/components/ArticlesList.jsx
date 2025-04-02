@@ -39,18 +39,22 @@ function ArticlesList() {
   return (
     <section>
       <h1>{topic ? topic : "Everything"}</h1>
-      <ArticlesFilter
-        topicsList={topicsList}
-        topicsAreLoading={topicsAreLoading}
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
-      <div className="pagination-line">
-        <PaginationLine
-          pageCount={Math.ceil(articlesCount / limit)}
-          searchParams={searchParams}
-          setSearchParams={setSearchParams}
-        />
+      <div className="articles-nav-bar">
+        <div className="articles-filter">
+          <ArticlesFilter
+            topicsList={topicsList}
+            topicsAreLoading={topicsAreLoading}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+          />
+        </div>
+        <div className="pagination-line">
+          <PaginationLine
+            pageCount={Math.ceil(articlesCount / limit)}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+          />
+        </div>
       </div>
       <div className="titles-container">
         {articles.map((article) => {
