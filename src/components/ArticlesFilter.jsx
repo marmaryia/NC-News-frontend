@@ -10,11 +10,13 @@ export default function ArticlesFilter({
   topicsAreLoading,
   setSearchParams,
   searchParams,
+  setPage,
 }) {
   const [topic, setTopic] = useState(searchParams.get("topic") || "");
 
   const handleChange = (event) => {
     setTopic(event.target.value);
+    setPage(1);
   };
 
   useEffect(() => {
