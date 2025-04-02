@@ -1,14 +1,13 @@
 import Stack from "@mui/material/Stack";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useState } from "react";
 
-function ArticlesSorting({ searchParams, setSearchParams }) {
-  const [sortQueries, setSortQueries] = useState({
-    sort_by: searchParams.get("sort_by") || "created_at",
-    order: searchParams.get("order") || "desc",
-  });
-
+function ArticlesSorting({
+  searchParams,
+  setSearchParams,
+  sortQueries,
+  setSortQueries,
+}) {
   function handleQuery(event, newSortQuery) {
     if (newSortQuery !== null) {
       setSortQueries((current) => {
@@ -33,7 +32,7 @@ function ArticlesSorting({ searchParams, setSearchParams }) {
   }
 
   return (
-    <Stack direction="row" spacing={3}>
+    <Stack direction="row" spacing={3} className="sorting-container">
       <ToggleButtonGroup
         value={sortQueries.sort_by}
         exclusive

@@ -16,14 +16,22 @@ function ArticlesList() {
   const [page, setPage] = useState(searchParams.get("p") || 1);
   const limit = searchParams.get("limit") || 10;
   const topic = searchParams.get("topic");
+  const [sortQueries, setSortQueries] = useState({
+    sort_by: searchParams.get("sort_by") || "created_at",
+    order: searchParams.get("order") || "desc",
+  });
 
   useEffect(() => {
     const p = searchParams.get("p");
     const sort_by = searchParams.get("sort_by");
     const order = searchParams.get("order");
     setPage(p || 1);
+    setSortQueries({
+      sort_by: sort_by || "created_at",
+      order: order || "desc",
+    });
 
-    getAllArticles(p, topic || null, sort_by, order).then(
+    getAllArticles(p, topic, sort_by, order).then(
       ({ articles, total_count }) => {
         setArticles(articles);
         setArticlesCount(total_count);
@@ -63,11 +71,14 @@ function ArticlesList() {
             setPage={setPage}
           />
         </div>
-
-        <ArticlesSorting
-          searchParams={searchParams}
-          setSearchParams={setSearchParams}
-        />
+        <div className="articles-sort">
+          <ArticlesSorting
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+            sortQueries={sortQueries}
+            setSortQueries={setSortQueries}
+          />
+        </div>
       </div>
       <div className="pagination-line">
         <PaginationLine
