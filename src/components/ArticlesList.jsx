@@ -1,24 +1,36 @@
 import { useEffect, useState } from "react";
-import { getAllArticles } from "../api";
+import { getAllArticles, getAllTopics } from "../api";
 import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
 import PaginationLine from "./Pagination";
+import ArticlesFilter from "./ArticlesFilter";
 
 function ArticlesList() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [articlesCount, setArticlesCount] = useState(0);
+  const [topicsList, setTopicsList] = useState("");
+  const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const p = searchParams.get("p");
   const limit = searchParams.get("limit") || 10;
+  const topic = searchParams.get("topic");
 
   useEffect(() => {
-    getAllArticles(p).then(({ articles, total_count }) => {
+    getAllArticles(p, topic || null).then(({ articles, total_count }) => {
       setArticles(articles);
       setArticlesCount(total_count);
       setIsLoading(false);
     });
   }, [searchParams]);
+
+  useEffect(() => {
+    setTopicsAreLoading(true);
+    getAllTopics().then((topicsFromApi) => {
+      setTopicsList(topicsFromApi);
+      setTopicsAreLoading(false);
+    });
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -26,7 +38,13 @@ function ArticlesList() {
 
   return (
     <section>
-      <h1>The latest</h1>
+      <h1>{topic ? topic : "Everything"}</h1>
+      <ArticlesFilter
+        topicsList={topicsList}
+        topicsAreLoading={topicsAreLoading}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
       <div className="pagination-line">
         <PaginationLine
           pageCount={Math.ceil(articlesCount / limit)}
