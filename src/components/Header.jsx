@@ -10,9 +10,9 @@ function Header() {
         <img className="logo" src="/logo.png" alt="logo" />
       </Link>
 
-      <Link> Coding </Link>
-      <Link> Football </Link>
-      <Link> Cooking </Link>
+      <Link to={"/?topic=coding"}> Coding </Link>
+      <Link to={"/?topic=football"}> Football </Link>
+      <Link to={"/?topic=cooking"}> Cooking </Link>
 
       <Link to="/login">
         <p className="login">

@@ -1,17 +1,45 @@
 import { useEffect, useState } from "react";
-import { getAllArticles } from "../api";
-import { Link } from "react-router-dom";
+import { getAllArticles, getAllTopics } from "../api";
+import { Link, useSearchParams } from "react-router-dom";
+import ArticleTitleCard from "./ArticleTitleCard";
+import PaginationLine from "./Pagination";
+import ArticlesFilter from "./ArticlesFilter";
 
 function ArticlesList() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [articlesCount, setArticlesCount] = useState(0);
+  const [topicsList, setTopicsList] = useState("");
+  const [topicsAreLoading, setTopicsAreLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(searchParams.get("p") || 1);
+  const limit = searchParams.get("limit") || 10;
+  const topic = searchParams.get("topic");
 
   useEffect(() => {
-    getAllArticles().then((articlesFromApi) => {
-      setArticles(articlesFromApi);
+    const p = searchParams.get("p");
+    setPage(p || 1);
+
+    getAllArticles(p, topic || null).then(({ articles, total_count }) => {
+      setArticles(articles);
+      setArticlesCount(total_count);
       setIsLoading(false);
     });
+  }, [searchParams]);
+
+  useEffect(() => {
+    setTopicsAreLoading(true);
+    getAllTopics().then((topicsFromApi) => {
+      setTopicsList(topicsFromApi);
+      setTopicsAreLoading(false);
+    });
   }, []);
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("p", page);
+    setSearchParams(newParams);
+  }, [page]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -19,7 +47,27 @@ function ArticlesList() {
 
   return (
     <section>
-      <h1>The latest</h1>
+      <h1>{topic ? topic : "Everything"}</h1>
+      <div className="articles-nav-bar">
+        <div className="articles-filter">
+          <ArticlesFilter
+            topicsList={topicsList}
+            topicsAreLoading={topicsAreLoading}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+            setPage={setPage}
+          />
+        </div>
+        <div className="pagination-line">
+          <PaginationLine
+            pageCount={Math.ceil(articlesCount / limit)}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+            page={page}
+            setPage={setPage}
+          />
+        </div>
+      </div>
       <div className="titles-container">
         {articles.map((article) => {
           return (
@@ -27,20 +75,19 @@ function ArticlesList() {
               to={`/articles/${article.article_id}`}
               key={article.article_id}
             >
-              <div className="title-card">
-                <h2 className="title">{article.title}</h2>
-                <p className="date">
-                  Date: {String(new Date(article.created_at)).split("+")[0]}
-                </p>
-                <p>Topic: {article.topic}</p>
-                <p>By: {article.author}</p>
-                <p>
-                  📑: {article.comment_count} | ❤️: {article.votes}
-                </p>
-              </div>
+              <ArticleTitleCard article={article} />
             </Link>
           );
         })}
+      </div>
+      <div className="pagination-line">
+        <PaginationLine
+          pageCount={Math.ceil(articlesCount / limit)}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     </section>
   );

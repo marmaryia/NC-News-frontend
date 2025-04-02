@@ -5,10 +5,12 @@ const apiClient = axios.create({
   timeout: 50000,
 });
 
-export function getAllArticles() {
-  return apiClient.get("/articles").then(({ data: { articles } }) => {
-    return articles;
-  });
+export function getAllArticles(p, topic) {
+  return apiClient
+    .get("/articles", { params: { p, topic } })
+    .then(({ data }) => {
+      return data;
+    });
 }
 
 export function getArticleById(article_id) {
@@ -51,4 +53,10 @@ export function postComment(article_id, username, body) {
 
 export function deleteComment(comment_id) {
   return apiClient.delete(`/comments/${comment_id}`);
+}
+
+export function getAllTopics() {
+  return apiClient.get("/topics").then(({ data: { topics } }) => {
+    return topics;
+  });
 }
