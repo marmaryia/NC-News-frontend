@@ -28,7 +28,11 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
       }
       {comments.map((comment) => {
         return (
-          <CommentCard comment={comment} setCommentCount={setCommentCount} />
+          <CommentCard
+            key={comment.comment_id}
+            comment={comment}
+            setCommentCount={setCommentCount}
+          />
         );
       })}
     </section>
