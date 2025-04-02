@@ -16,11 +16,11 @@ export default function ArticlesFilter({
 
   const handleChange = (event) => {
     setTopic(event.target.value);
-    setPage(1);
   };
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
+
     if (topic === "Everything") {
       newParams.delete("topic");
     } else {
@@ -29,8 +29,12 @@ export default function ArticlesFilter({
     setSearchParams(newParams);
   }, [topic]);
 
-  if (topicsAreLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    setTopic(searchParams.get("topic") || "");
+  }, [searchParams]);
 
+  if (topicsAreLoading) return <div>Loading...</div>;
+  console.log(topic);
   return (
     <Box sx={{ width: 120 }}>
       <FormControl>

@@ -12,7 +12,6 @@ function ArticlesList() {
   const [topicsList, setTopicsList] = useState("");
   const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [page, setPage] = useState(searchParams.get("p") || 1);
   const limit = searchParams.get("limit") || 10;
   const topic = searchParams.get("topic");
@@ -20,6 +19,7 @@ function ArticlesList() {
   useEffect(() => {
     const p = searchParams.get("p");
     setPage(p || 1);
+
     getAllArticles(p, topic || null).then(({ articles, total_count }) => {
       setArticles(articles);
       setArticlesCount(total_count);
@@ -50,13 +50,13 @@ function ArticlesList() {
       <h1>{topic ? topic : "Everything"}</h1>
       <div className="articles-nav-bar">
         <div className="articles-filter">
-          {/* <ArticlesFilter
+          <ArticlesFilter
             topicsList={topicsList}
             topicsAreLoading={topicsAreLoading}
             searchParams={searchParams}
             setSearchParams={setSearchParams}
             setPage={setPage}
-          /> */}
+          />
         </div>
         <div className="pagination-line">
           <PaginationLine
