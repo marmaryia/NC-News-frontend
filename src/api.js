@@ -7,7 +7,7 @@ const apiClient = axios.create({
 
 export function getAllArticles(p, topic, sort_by, order) {
   return apiClient
-    .get("/articles", { params: { p, topic, sort_by } })
+    .get("/articles", { params: { p, topic, sort_by, order } })
     .then(({ data }) => {
       return data;
     });

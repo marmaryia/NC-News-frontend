@@ -63,19 +63,19 @@ function ArticlesList() {
             setPage={setPage}
           />
         </div>
-        <div className="pagination-line">
-          <PaginationLine
-            pageCount={Math.ceil(articlesCount / limit)}
-            searchParams={searchParams}
-            setSearchParams={setSearchParams}
-            page={page}
-            setPage={setPage}
-          />
-        </div>
-        Sort by:
+
         <ArticlesSorting
           searchParams={searchParams}
           setSearchParams={setSearchParams}
+        />
+      </div>
+      <div className="pagination-line">
+        <PaginationLine
+          pageCount={Math.ceil(articlesCount / limit)}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          page={page}
+          setPage={setPage}
         />
       </div>
       <div className="titles-container">
