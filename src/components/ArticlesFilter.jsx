@@ -34,7 +34,7 @@ export default function ArticlesFilter({
   }, [searchParams]);
 
   if (topicsAreLoading) return <div>Loading...</div>;
-  console.log(topic);
+
   return (
     <Box sx={{ width: 120 }}>
       <FormControl>

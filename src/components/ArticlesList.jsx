@@ -4,6 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
 import PaginationLine from "./Pagination";
 import ArticlesFilter from "./ArticlesFilter";
+import ArticlesSorting from "./ArticlesSorting";
 
 function ArticlesList() {
   const [articles, setArticles] = useState([]);
@@ -18,13 +19,17 @@ function ArticlesList() {
 
   useEffect(() => {
     const p = searchParams.get("p");
+    const sort_by = searchParams.get("sort_by");
+    const order = searchParams.get("order");
     setPage(p || 1);
 
-    getAllArticles(p, topic || null).then(({ articles, total_count }) => {
-      setArticles(articles);
-      setArticlesCount(total_count);
-      setIsLoading(false);
-    });
+    getAllArticles(p, topic || null, sort_by, order).then(
+      ({ articles, total_count }) => {
+        setArticles(articles);
+        setArticlesCount(total_count);
+        setIsLoading(false);
+      }
+    );
   }, [searchParams]);
 
   useEffect(() => {
@@ -67,6 +72,11 @@ function ArticlesList() {
             setPage={setPage}
           />
         </div>
+        Sort by:
+        <ArticlesSorting
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
       </div>
       <div className="titles-container">
         {articles.map((article) => {
