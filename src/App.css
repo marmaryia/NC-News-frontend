@@ -3,15 +3,37 @@
 }
 
 #root {
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 100vw;
   margin: 0;
-  padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+}
+
+header,
+footer {
+  width: 100%;
+  background-color: var(--tertiary);
+  color: var(--secondary-text-colour);
+  margin: 0;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section {
+  max-width: 1280px;
+  justify-self: center;
 }
 
 .logo {
-  height: 6em;
+  height: 4em;
   will-change: filter;
   transition: 300ms;
   border-radius: 5px;
@@ -20,31 +42,11 @@
   box-shadow: 0 0.5em 1em;
 }
 
-header,
-footer {
-  width: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-header {
-  align-self: top;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-}
-
 .title-card {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 2rem;
-  background-color: #797596;
+  background-color: var(--secondary);
   border-radius: 10px;
   transition: 0.2s;
 }
@@ -63,7 +65,7 @@ footer {
 }
 
 article {
-  background-color: #6c698d;
+  background-color: var(--secondary);
   padding: 1em;
   margin-top: 1em;
   border-radius: 1em;
@@ -104,7 +106,7 @@ article p {
 
 .voting-button {
   font-size: 1.1em;
-  background-color: #6c698d;
+  background-color: var(--tertiary);
 }
 
 .comment {

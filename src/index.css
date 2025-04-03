@@ -4,9 +4,8 @@
   font-weight: 400;
   height: 100%;
 
-  color: #1b2d2a;
-  background-color: #a4b494;
-
+  color: var(--text-colour);
+  background-color: var(--primary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +20,11 @@ a {
 }
 
 body {
+  --primary: #fffffe;
+  --secondary: #d1d1e9;
+  --tertiary: #6246ea;
+  --text-colour: #2b2c34;
+  --secondary-text-colour: #fffffe;
   margin: 0;
   display: flex;
   place-items: start;
@@ -41,7 +45,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #dd5e2b;
+  background-color: var(--tertiary);
+  color: var(--secondary-text-colour);
   cursor: pointer;
   transition: background-color 0.5s;
 }
