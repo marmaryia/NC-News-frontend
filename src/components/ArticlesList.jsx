@@ -5,13 +5,19 @@ import ArticleTitleCard from "./ArticleTitleCard";
 import PaginationLine from "./Pagination";
 import ArticlesFilter from "./ArticlesFilter";
 import ArticlesSorting from "./ArticlesSorting";
+import useApiRequest from "../useApiRequest";
 
 function ArticlesList() {
   const [articlesData, setArticlesData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [topicsList, setTopicsList] = useState([]);
+  const {
+    data: topicsList,
+    isLoading: topicsAreLoading,
+    error: topicsError,
+  } = useApiRequest(getAllTopics);
+
   const [topicDescription, setTopicDescription] = useState("");
-  const [topicsAreLoading, setTopicsAreLoading] = useState(true);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [queries, setQueries] = useState({
     p: Number(searchParams.get("p") || 1),
@@ -21,14 +27,6 @@ function ArticlesList() {
   });
 
   const limit = searchParams.get("limit") || 10;
-
-  useEffect(() => {
-    setTopicsAreLoading(true);
-    getAllTopics().then((topicsFromApi) => {
-      setTopicsList(topicsFromApi);
-      setTopicsAreLoading(false);
-    });
-  }, []);
 
   useEffect(() => {
     const p = searchParams.get("p");
@@ -43,18 +41,23 @@ function ArticlesList() {
       order: order || "desc",
     });
 
-    setTopicDescription(() => {
-      for (const topicFromList of topicsList) {
-        if (topicFromList.slug === topic) {
-          return topicFromList.description;
-        }
-      }
-      return "Everything";
-    });
-
     getAllArticles(p, topic, sort_by, order).then((dataFromApi) => {
       setArticlesData(dataFromApi);
       setIsLoading(false);
+    });
+  }, [searchParams]);
+
+  useEffect(() => {
+    const topic = searchParams.get("topic");
+    setTopicDescription(() => {
+      if (Array.isArray(topicsList)) {
+        for (const topicFromList of topicsList) {
+          if (topicFromList.slug === topic) {
+            return topicFromList.description;
+          }
+        }
+      }
+      return "Everything";
     });
   }, [searchParams, topicsList]);
 
