@@ -16,18 +16,15 @@ export default function ArticlesFilter({
 
   const handleChange = (event) => {
     setTopic(event.target.value);
-  };
-
-  useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
 
-    if (topic === "Everything") {
+    if (event.target.value === "Everything") {
       newParams.delete("topic");
     } else {
-      newParams.set("topic", topic);
+      newParams.set("topic", event.target.value);
     }
     setSearchParams(newParams);
-  }, [topic]);
+  };
 
   useEffect(() => {
     setTopic(searchParams.get("topic") || "");

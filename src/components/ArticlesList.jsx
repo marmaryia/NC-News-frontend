@@ -41,18 +41,13 @@ function ArticlesList() {
   }, [searchParams]);
 
   useEffect(() => {
+    // get a list of topics
     setTopicsAreLoading(true);
     getAllTopics().then((topicsFromApi) => {
       setTopicsList(topicsFromApi);
       setTopicsAreLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("p", page);
-    setSearchParams(newParams);
-  }, [page]);
 
   if (isLoading) {
     return <p>Loading...</p>;
