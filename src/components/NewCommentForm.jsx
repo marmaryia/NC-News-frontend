@@ -3,7 +3,7 @@ import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { postComment } from "../api";
 import { Link } from "react-router-dom";
 
-function NewCommentForm({ article_id, setCommentCount }) {
+function NewCommentForm({ article_id, setCommentCount, setComments }) {
   const [commentText, setCommentText] = useState("");
   const [message, setMessage] = useState("");
   const { loggedInUser } = useContext(LoggedInUserContext);
@@ -16,7 +16,8 @@ function NewCommentForm({ article_id, setCommentCount }) {
     e.preventDefault();
     setMessage("Submitting your comment...");
     postComment(article_id, loggedInUser.username, commentText)
-      .then(() => {
+      .then((comment) => {
+        setComments((currentComments) => [comment, ...currentComments]);
         setCommentCount((current) => current + 1);
         setCommentText("");
         setMessage("Comment submitted successfully");

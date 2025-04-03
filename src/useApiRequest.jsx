@@ -15,5 +15,5 @@ export default function useApiRequest(apiFunction, ...args) {
       .finally(() => setIsLoading(false));
   }, [...args]);
 
-  return { data, isLoading, error };
+  return { data, setData, isLoading, error };
 }

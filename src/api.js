@@ -23,6 +23,7 @@ export function getArticleById(article_id) {
 }
 
 export function getCommentsByArticleId(article_id, p) {
+  console.log("getting comments");
   return apiClient
     .get(`/articles/${article_id}/comments`, { params: { p } })
     .then(({ data: { comments } }) => {
