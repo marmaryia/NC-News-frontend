@@ -28,13 +28,13 @@ function CommentCard({ comment, setCommentCount }) {
           :
         </p>
         {loggedInUser.username === comment.author ? (
-          <p
+          <button
             onClick={handleClick}
             className="delete-comment-button"
             title="Delete comment"
           >
             ✖️
-          </p>
+          </button>
         ) : null}
       </div>
       <div className="comment-delete-message">{message}</div>
