@@ -1,14 +1,16 @@
 import Pagination from "@mui/material/Pagination";
 
 function PaginationLine({
-  page,
-  setPage,
+  queries,
+  setQueries,
   pageCount,
   searchParams,
   setSearchParams,
 }) {
   function handlePageChange(event, page) {
-    setPage(page);
+    setQueries((current) => {
+      return { ...current, p: page };
+    });
     const newParams = new URLSearchParams(searchParams);
     newParams.set("p", page);
     setSearchParams(newParams);
@@ -17,7 +19,7 @@ function PaginationLine({
   return (
     <Pagination
       count={pageCount}
-      page={Number(page)}
+      page={queries.p}
       onChange={handlePageChange}
     />
   );

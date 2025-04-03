@@ -13,20 +13,24 @@ function ArticlesList() {
   const [topicsList, setTopicsList] = useState([]);
   const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("p") || 1);
-  const limit = searchParams.get("limit") || 10;
-  const topic = searchParams.get("topic");
-  const [sortQueries, setSortQueries] = useState({
+  const [queries, setQueries] = useState({
+    p: Number(searchParams.get("p") || 1),
+    topic: searchParams.get("topic" || ""),
     sort_by: searchParams.get("sort_by") || "created_at",
     order: searchParams.get("order") || "desc",
   });
+
+  const limit = searchParams.get("limit") || 10;
 
   useEffect(() => {
     const p = searchParams.get("p");
     const sort_by = searchParams.get("sort_by");
     const order = searchParams.get("order");
-    setPage(p || 1);
-    setSortQueries({
+    const topic = searchParams.get("topic");
+
+    setQueries({
+      p: Number(p || 1),
+      topic: topic || "",
       sort_by: sort_by || "created_at",
       order: order || "desc",
     });
@@ -55,14 +59,14 @@ function ArticlesList() {
 
   let topicDescription;
   topicsList.forEach((topicFromList) => {
-    if (topicFromList.slug === topic) {
+    if (topicFromList.slug === searchParams.get("topic")) {
       topicDescription = topicFromList.description;
     }
   });
 
   return (
     <section>
-      <h1>{topic ? topicDescription : "Everything"}</h1>
+      <h1>{topicDescription ? topicDescription : "Everything"}</h1>
       <div className="articles-nav-bar">
         <div className="articles-filter">
           <ArticlesFilter
@@ -70,15 +74,16 @@ function ArticlesList() {
             topicsAreLoading={topicsAreLoading}
             searchParams={searchParams}
             setSearchParams={setSearchParams}
-            setPage={setPage}
+            queries={queries}
+            setQueries={setQueries}
           />
         </div>
         <div className="articles-sort">
           <ArticlesSorting
             searchParams={searchParams}
             setSearchParams={setSearchParams}
-            sortQueries={sortQueries}
-            setSortQueries={setSortQueries}
+            queries={queries}
+            setQueries={setQueries}
           />
         </div>
       </div>
@@ -87,8 +92,8 @@ function ArticlesList() {
           pageCount={Math.ceil(articlesCount / limit)}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
-          page={page}
-          setPage={setPage}
+          queries={queries}
+          setQueries={setQueries}
         />
       </div>
       <div className="titles-container">
@@ -108,8 +113,8 @@ function ArticlesList() {
           pageCount={Math.ceil(articlesCount / limit)}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
-          page={page}
-          setPage={setPage}
+          queries={queries}
+          setQueries={setQueries}
         />
       </div>
     </section>

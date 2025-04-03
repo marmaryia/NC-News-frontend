@@ -10,12 +10,13 @@ export default function ArticlesFilter({
   topicsAreLoading,
   setSearchParams,
   searchParams,
-  setPage,
+  queries,
+  setQueries,
 }) {
-  const [topic, setTopic] = useState(searchParams.get("topic") || "");
-
   const handleChange = (event) => {
-    setTopic(event.target.value);
+    setQueries((current) => {
+      return { ...current, topic: event.target.value };
+    });
     const newParams = new URLSearchParams(searchParams);
 
     if (event.target.value === "Everything") {
@@ -26,10 +27,6 @@ export default function ArticlesFilter({
     setSearchParams(newParams);
   };
 
-  useEffect(() => {
-    setTopic(searchParams.get("topic") || "");
-  }, [searchParams]);
-
   if (topicsAreLoading) return <div>Loading...</div>;
 
   return (
@@ -39,7 +36,7 @@ export default function ArticlesFilter({
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={topic}
+          value={queries.topic}
           label="Topic"
           onChange={handleChange}
         >

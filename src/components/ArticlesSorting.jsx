@@ -5,12 +5,12 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 function ArticlesSorting({
   searchParams,
   setSearchParams,
-  sortQueries,
-  setSortQueries,
+  queries,
+  setQueries,
 }) {
   function handleQuery(event, newSortQuery) {
     if (newSortQuery !== null) {
-      setSortQueries((current) => {
+      setQueries((current) => {
         return { ...current, sort_by: newSortQuery };
       });
     }
@@ -18,7 +18,7 @@ function ArticlesSorting({
 
   function handleDirection(event, newSortDirection) {
     if (newSortDirection !== null) {
-      setSortQueries((current) => {
+      setQueries((current) => {
         return { ...current, order: newSortDirection };
       });
     }
@@ -26,15 +26,15 @@ function ArticlesSorting({
 
   function handleSubmit() {
     const newParams = new URLSearchParams(searchParams);
-    newParams.set("sort_by", sortQueries.sort_by);
-    newParams.set("order", sortQueries.order);
+    newParams.set("sort_by", queries.sort_by);
+    newParams.set("order", queries.order);
     setSearchParams(newParams);
   }
 
   return (
     <Stack direction="row" spacing={3} className="sorting-container">
       <ToggleButtonGroup
-        value={sortQueries.sort_by}
+        value={queries.sort_by}
         exclusive
         onChange={handleQuery}
       >
@@ -44,7 +44,7 @@ function ArticlesSorting({
       </ToggleButtonGroup>
 
       <ToggleButtonGroup
-        value={sortQueries.order}
+        value={queries.order}
         exclusive
         onChange={handleDirection}
       >
