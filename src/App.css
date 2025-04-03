@@ -31,6 +31,15 @@ footer {
   flex-wrap: wrap;
 }
 
+header {
+  align-self: top;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
 .title-card {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -198,4 +207,9 @@ select {
   flex-wrap: wrap;
   gap: 1em;
   margin-right: 2.5em;
+}
+
+.MuiPaper-root {
+  margin: 5em;
+  justify-self: center;
 }

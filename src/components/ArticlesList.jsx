@@ -1,17 +1,25 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { getAllArticles, getAllTopics } from "../api";
 import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
 import PaginationLine from "./Pagination";
 import ArticlesFilter from "./ArticlesFilter";
 import ArticlesSorting from "./ArticlesSorting";
+import useApiRequest from "../useApiRequest";
+import Error from "./Error";
 
 function ArticlesList() {
   const [articlesData, setArticlesData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [topicsList, setTopicsList] = useState([]);
+  const [error, setError] = useState(null);
+  const {
+    data: topicsList,
+    isLoading: topicsAreLoading,
+    error: topicsError,
+  } = useApiRequest(getAllTopics);
+
   const [topicDescription, setTopicDescription] = useState("");
-  const [topicsAreLoading, setTopicsAreLoading] = useState(true);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [queries, setQueries] = useState({
     p: Number(searchParams.get("p") || 1),
@@ -21,14 +29,6 @@ function ArticlesList() {
   });
 
   const limit = searchParams.get("limit") || 10;
-
-  useEffect(() => {
-    setTopicsAreLoading(true);
-    getAllTopics().then((topicsFromApi) => {
-      setTopicsList(topicsFromApi);
-      setTopicsAreLoading(false);
-    });
-  }, []);
 
   useEffect(() => {
     const p = searchParams.get("p");
@@ -42,24 +42,40 @@ function ArticlesList() {
       sort_by: sort_by || "created_at",
       order: order || "desc",
     });
+    setError(null);
+    setIsLoading(true);
+    getAllArticles(p, topic, sort_by, order)
+      .then((dataFromApi) => {
+        setArticlesData(dataFromApi);
+      })
+      .catch((error) => {
+        setError({ code: error.response.status, msg: error.response.data.msg });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [searchParams]);
 
+  useEffect(() => {
+    const topic = searchParams.get("topic");
     setTopicDescription(() => {
-      for (const topicFromList of topicsList) {
-        if (topicFromList.slug === topic) {
-          return topicFromList.description;
+      if (Array.isArray(topicsList)) {
+        for (const topicFromList of topicsList) {
+          if (topicFromList.slug === topic) {
+            return topicFromList.description;
+          }
         }
       }
       return "Everything";
-    });
-
-    getAllArticles(p, topic, sort_by, order).then((dataFromApi) => {
-      setArticlesData(dataFromApi);
-      setIsLoading(false);
     });
   }, [searchParams, topicsList]);
 
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error || topicsError) {
+    return <Error error={error || topicsError} />;
   }
 
   return (

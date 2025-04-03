@@ -3,24 +3,26 @@ import { getArticleById } from "../api";
 import { useParams } from "react-router-dom";
 import CommentsSection from "./CommentsSection";
 import Voting from "./Voting";
+import useApiRequest from "../useApiRequest";
+import Error from "./Error";
 
 function ArticlePage() {
-  const [article, setArticle] = useState({});
+  const { article_id } = useParams();
+  const {
+    data: article,
+    isLoading,
+    error,
+  } = useApiRequest(getArticleById, article_id);
   const [likesCount, setLikesCount] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [showComments, setShowComments] = useState(false);
 
-  const { article_id } = useParams();
-
   useEffect(() => {
-    getArticleById(article_id).then((articleFromApi) => {
-      setArticle(articleFromApi);
-      setLikesCount(articleFromApi.votes);
-      setCommentCount(articleFromApi.comment_count);
-      setIsLoading(false);
-    });
-  }, []);
+    if (article) {
+      setLikesCount(article.votes);
+      setCommentCount(article.comment_count);
+    }
+  }, [article]);
 
   function handleShowingComments() {
     setShowComments(!showComments);
@@ -28,6 +30,10 @@ function ArticlePage() {
 
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <Error error={error} />;
   }
 
   return (
