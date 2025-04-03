@@ -3,7 +3,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useEffect, useState } from "react";
 
 export default function ArticlesFilter({
   topicsList,
@@ -13,10 +12,11 @@ export default function ArticlesFilter({
   queries,
   setQueries,
 }) {
-  const handleChange = (event) => {
+  function handleChange(event) {
     setQueries((current) => {
-      return { ...current, topic: event.target.value };
+      return { ...current, topic: event.target.value, p: 1 };
     });
+
     const newParams = new URLSearchParams(searchParams);
 
     if (event.target.value === "Everything") {
@@ -24,8 +24,9 @@ export default function ArticlesFilter({
     } else {
       newParams.set("topic", event.target.value);
     }
+    newParams.set("p", 1);
     setSearchParams(newParams);
-  };
+  }
 
   if (topicsAreLoading) return <div>Loading...</div>;
 

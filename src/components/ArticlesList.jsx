@@ -45,7 +45,6 @@ function ArticlesList() {
   }, [searchParams]);
 
   useEffect(() => {
-    // get a list of topics
     setTopicsAreLoading(true);
     getAllTopics().then((topicsFromApi) => {
       setTopicsList(topicsFromApi);
