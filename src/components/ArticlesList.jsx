@@ -49,7 +49,7 @@ function ArticlesList() {
         setArticlesData(dataFromApi);
       })
       .catch((error) => {
-        setError(error);
+        setError({ code: error.response.status, msg: error.response.data.msg });
       })
       .finally(() => {
         setIsLoading(false);
@@ -74,12 +74,8 @@ function ArticlesList() {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return (
-      <Error
-        error={{ code: error.response.status, msg: error.response.data.msg }}
-      />
-    );
+  if (error || topicsError) {
+    return <Error error={error || topicsError} />;
   }
 
   return (
