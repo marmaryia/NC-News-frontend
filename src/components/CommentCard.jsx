@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { deleteComment } from "../api";
 
-function CommentCard({ comment, setCommentCount }) {
+function CommentCard({ comment, setCommentCount, setComments }) {
   const { loggedInUser } = useContext(LoggedInUserContext);
   const [message, setMessage] = useState("");
 
@@ -11,6 +11,16 @@ function CommentCard({ comment, setCommentCount }) {
     deleteComment(comment.comment_id)
       .then(() => {
         setCommentCount((current) => current - 1);
+        setComments((currentComments) => {
+          const newComments = [...currentComments];
+          for (let i = 0; i < newComments.length; i++) {
+            if (newComments[i].comment_id === comment.comment_id) {
+              newComments.splice(i, 1);
+              break;
+            }
+          }
+          return newComments;
+        });
         setMessage("");
       })
       .catch(() => {

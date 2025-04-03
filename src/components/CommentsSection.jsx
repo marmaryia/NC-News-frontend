@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { getCommentsByArticleId } from "../api";
 import NewCommentForm from "./NewCommentForm";
 import CommentCard from "./CommentCard";
@@ -32,6 +31,7 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
             key={comment.comment_id}
             comment={comment}
             setCommentCount={setCommentCount}
+            setComments={setComments}
           />
         );
       })}
