@@ -5,9 +5,9 @@ const apiClient = axios.create({
   timeout: 50000,
 });
 
-export function getAllArticles(p, topic) {
+export function getAllArticles(p, topic, sort_by, order) {
   return apiClient
-    .get("/articles", { params: { p, topic } })
+    .get("/articles", { params: { p, topic, sort_by, order } })
     .then(({ data }) => {
       return data;
     });

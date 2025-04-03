@@ -4,27 +4,44 @@ import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
 import PaginationLine from "./Pagination";
 import ArticlesFilter from "./ArticlesFilter";
+import ArticlesSorting from "./ArticlesSorting";
 
 function ArticlesList() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [articlesCount, setArticlesCount] = useState(0);
-  const [topicsList, setTopicsList] = useState("");
+  const [topicsList, setTopicsList] = useState([]);
   const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("p") || 1);
+  const [queries, setQueries] = useState({
+    p: Number(searchParams.get("p") || 1),
+    topic: searchParams.get("topic" || ""),
+    sort_by: searchParams.get("sort_by") || "created_at",
+    order: searchParams.get("order") || "desc",
+  });
+
   const limit = searchParams.get("limit") || 10;
-  const topic = searchParams.get("topic");
 
   useEffect(() => {
     const p = searchParams.get("p");
-    setPage(p || 1);
+    const sort_by = searchParams.get("sort_by");
+    const order = searchParams.get("order");
+    const topic = searchParams.get("topic");
 
-    getAllArticles(p, topic || null).then(({ articles, total_count }) => {
-      setArticles(articles);
-      setArticlesCount(total_count);
-      setIsLoading(false);
+    setQueries({
+      p: Number(p || 1),
+      topic: topic || "",
+      sort_by: sort_by || "created_at",
+      order: order || "desc",
     });
+
+    getAllArticles(p, topic, sort_by, order).then(
+      ({ articles, total_count }) => {
+        setArticles(articles);
+        setArticlesCount(total_count);
+        setIsLoading(false);
+      }
+    );
   }, [searchParams]);
 
   useEffect(() => {
@@ -35,19 +52,20 @@ function ArticlesList() {
     });
   }, []);
 
-  useEffect(() => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("p", page);
-    setSearchParams(newParams);
-  }, [page]);
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
+  let topicDescription;
+  topicsList.forEach((topicFromList) => {
+    if (topicFromList.slug === searchParams.get("topic")) {
+      topicDescription = topicFromList.description;
+    }
+  });
+
   return (
     <section>
-      <h1>{topic ? topic : "Everything"}</h1>
+      <h1>{topicDescription ? topicDescription : "Everything"}</h1>
       <div className="articles-nav-bar">
         <div className="articles-filter">
           <ArticlesFilter
@@ -55,18 +73,27 @@ function ArticlesList() {
             topicsAreLoading={topicsAreLoading}
             searchParams={searchParams}
             setSearchParams={setSearchParams}
-            setPage={setPage}
+            queries={queries}
+            setQueries={setQueries}
           />
         </div>
-        <div className="pagination-line">
-          <PaginationLine
-            pageCount={Math.ceil(articlesCount / limit)}
+        <div className="articles-sort">
+          <ArticlesSorting
             searchParams={searchParams}
             setSearchParams={setSearchParams}
-            page={page}
-            setPage={setPage}
+            queries={queries}
+            setQueries={setQueries}
           />
         </div>
+      </div>
+      <div className="pagination-line">
+        <PaginationLine
+          pageCount={Math.ceil(articlesCount / limit)}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          queries={queries}
+          setQueries={setQueries}
+        />
       </div>
       <div className="titles-container">
         {articles.map((article) => {
@@ -85,8 +112,8 @@ function ArticlesList() {
           pageCount={Math.ceil(articlesCount / limit)}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
-          page={page}
-          setPage={setPage}
+          queries={queries}
+          setQueries={setQueries}
         />
       </div>
     </section>

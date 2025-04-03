@@ -3,38 +3,33 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useEffect, useState } from "react";
 
 export default function ArticlesFilter({
   topicsList,
   topicsAreLoading,
   setSearchParams,
   searchParams,
-  setPage,
+  queries,
+  setQueries,
 }) {
-  const [topic, setTopic] = useState(searchParams.get("topic") || "");
+  function handleChange(event) {
+    setQueries((current) => {
+      return { ...current, topic: event.target.value, p: 1 };
+    });
 
-  const handleChange = (event) => {
-    setTopic(event.target.value);
-  };
-
-  useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
 
-    if (topic === "Everything") {
+    if (event.target.value === "Everything") {
       newParams.delete("topic");
     } else {
-      newParams.set("topic", topic);
+      newParams.set("topic", event.target.value);
     }
+    newParams.set("p", 1);
     setSearchParams(newParams);
-  }, [topic]);
-
-  useEffect(() => {
-    setTopic(searchParams.get("topic") || "");
-  }, [searchParams]);
+  }
 
   if (topicsAreLoading) return <div>Loading...</div>;
-  console.log(topic);
+
   return (
     <Box sx={{ width: 120 }}>
       <FormControl>
@@ -42,7 +37,7 @@ export default function ArticlesFilter({
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={topic}
+          value={queries.topic}
           label="Topic"
           onChange={handleChange}
         >
