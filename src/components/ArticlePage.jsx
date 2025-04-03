@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CommentsSection from "./CommentsSection";
 import Voting from "./Voting";
 import useApiRequest from "../useApiRequest";
+import Error from "./Error";
 
 function ArticlePage() {
   const { article_id } = useParams();
@@ -29,6 +30,10 @@ function ArticlePage() {
 
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <Error error={error} />;
   }
 
   return (

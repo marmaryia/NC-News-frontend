@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  height: 100%;
 
   color: #1b2d2a;
   background-color: #a4b494;
@@ -22,7 +23,7 @@ a {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: start;
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;

@@ -11,7 +11,13 @@ export default function useApiRequest(apiFunction, ...args) {
     setIsLoading(true);
     apiFunction(...args)
       .then((data) => setData(data))
-      .catch((error) => setError(error))
+      .catch((error) => {
+        if (error.response.status === 404)
+          setError({
+            code: 404,
+            msg: "We could not find what you are looking for",
+          });
+      })
       .finally(() => setIsLoading(false));
   }, [...args]);
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { getAllArticles, getAllTopics } from "../api";
 import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
@@ -6,10 +6,12 @@ import PaginationLine from "./Pagination";
 import ArticlesFilter from "./ArticlesFilter";
 import ArticlesSorting from "./ArticlesSorting";
 import useApiRequest from "../useApiRequest";
+import Error from "./Error";
 
 function ArticlesList() {
   const [articlesData, setArticlesData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const {
     data: topicsList,
     isLoading: topicsAreLoading,
@@ -40,11 +42,18 @@ function ArticlesList() {
       sort_by: sort_by || "created_at",
       order: order || "desc",
     });
-
-    getAllArticles(p, topic, sort_by, order).then((dataFromApi) => {
-      setArticlesData(dataFromApi);
-      setIsLoading(false);
-    });
+    setError(null);
+    setIsLoading(true);
+    getAllArticles(p, topic, sort_by, order)
+      .then((dataFromApi) => {
+        setArticlesData(dataFromApi);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [searchParams]);
 
   useEffect(() => {
@@ -63,6 +72,14 @@ function ArticlesList() {
 
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return (
+      <Error
+        error={{ code: error.response.status, msg: error.response.data.msg }}
+      />
+    );
   }
 
   return (
