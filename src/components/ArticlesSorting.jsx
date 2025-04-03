@@ -2,6 +2,9 @@ import Stack from "@mui/material/Stack";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
+import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
+import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
+
 function ArticlesSorting({
   searchParams,
   setSearchParams,
@@ -48,8 +51,12 @@ function ArticlesSorting({
         exclusive
         onChange={handleDirection}
       >
-        <ToggleButton value="desc">Desc</ToggleButton>
-        <ToggleButton value="asc">Asc</ToggleButton>
+        <ToggleButton value="desc">
+          <ArrowDownwardRoundedIcon />
+        </ToggleButton>
+        <ToggleButton value="asc">
+          <ArrowUpwardRoundedIcon />
+        </ToggleButton>
       </ToggleButtonGroup>
 
       <ToggleButtonGroup>
