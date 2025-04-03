@@ -47,7 +47,11 @@ function NewCommentForm({ article_id, setCommentCount }) {
       />
       <br />
       {message}
-      <button type="submit" className="submit-button">
+      <button
+        type="submit"
+        className="submit-button"
+        disabled={commentText ? false : true}
+      >
         Submit
       </button>
     </form>
