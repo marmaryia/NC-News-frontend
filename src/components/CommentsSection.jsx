@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getCommentsByArticleId } from "../api";
 import NewCommentForm from "./NewCommentForm";
 import CommentCard from "./CommentCard";
+import LoadMoreComments from "./LoadMoreComments";
 
 function CommentsSection({ article_id, commentCount, setCommentCount }) {
   const [comments, setComments] = useState([]);
@@ -35,6 +36,13 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
           />
         );
       })}
+      {comments.length < commentCount ? (
+        <LoadMoreComments
+          article_id={article_id}
+          setComments={setComments}
+          p={comments.length / 10 + 1}
+        />
+      ) : null}
     </section>
   );
 }

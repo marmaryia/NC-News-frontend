@@ -21,9 +21,9 @@ export function getArticleById(article_id) {
     });
 }
 
-export function getCommentsByArticleId(article_id) {
+export function getCommentsByArticleId(article_id, p) {
   return apiClient
-    .get(`/articles/${article_id}/comments`)
+    .get(`/articles/${article_id}/comments`, { params: { p } })
     .then(({ data: { comments } }) => {
       return comments;
     });
