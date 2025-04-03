@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { getAllUsers } from "../api";
+import useApiRequest from "../useApiRequest";
 
 function LoginForm() {
   const [selectedUser, setSelectedUser] = useState();
   const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: users, isLoading, error } = useApiRequest(getAllUsers);
 
   function handleChange(e) {
     if (e.target.value) {
@@ -20,14 +20,6 @@ function LoginForm() {
       setLoggedInUser(users[selectedUser]);
     }
   }
-
-  useEffect(() => {
-    setIsLoading(true);
-    getAllUsers().then((usersFromApi) => {
-      setUsers(usersFromApi);
-      setIsLoading(false);
-    });
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
