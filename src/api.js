@@ -6,6 +6,7 @@ const apiClient = axios.create({
 });
 
 export function getAllArticles(p, topic, sort_by, order) {
+  console.log("getting articles");
   return apiClient
     .get("/articles", { params: { p, topic, sort_by, order } })
     .then(({ data }) => {
