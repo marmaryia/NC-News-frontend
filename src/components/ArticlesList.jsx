@@ -7,10 +7,10 @@ import ArticlesFilter from "./ArticlesFilter";
 import ArticlesSorting from "./ArticlesSorting";
 
 function ArticlesList() {
-  const [articles, setArticles] = useState([]);
+  const [articlesData, setArticlesData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [articlesCount, setArticlesCount] = useState(0);
   const [topicsList, setTopicsList] = useState([]);
+  const [topicDescription, setTopicDescription] = useState("");
   const [topicsAreLoading, setTopicsAreLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [queries, setQueries] = useState({
@@ -21,6 +21,14 @@ function ArticlesList() {
   });
 
   const limit = searchParams.get("limit") || 10;
+
+  useEffect(() => {
+    setTopicsAreLoading(true);
+    getAllTopics().then((topicsFromApi) => {
+      setTopicsList(topicsFromApi);
+      setTopicsAreLoading(false);
+    });
+  }, []);
 
   useEffect(() => {
     const p = searchParams.get("p");
@@ -35,33 +43,24 @@ function ArticlesList() {
       order: order || "desc",
     });
 
-    getAllArticles(p, topic, sort_by, order).then(
-      ({ articles, total_count }) => {
-        setArticles(articles);
-        setArticlesCount(total_count);
-        setIsLoading(false);
+    setTopicDescription(() => {
+      for (const topicFromList of topicsList) {
+        if (topicFromList.slug === topic) {
+          return topicFromList.description;
+        }
       }
-    );
-  }, [searchParams]);
-
-  useEffect(() => {
-    setTopicsAreLoading(true);
-    getAllTopics().then((topicsFromApi) => {
-      setTopicsList(topicsFromApi);
-      setTopicsAreLoading(false);
+      return "Everything";
     });
-  }, []);
+
+    getAllArticles(p, topic, sort_by, order).then((dataFromApi) => {
+      setArticlesData(dataFromApi);
+      setIsLoading(false);
+    });
+  }, [searchParams, topicsList]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
-  let topicDescription;
-  topicsList.forEach((topicFromList) => {
-    if (topicFromList.slug === searchParams.get("topic")) {
-      topicDescription = topicFromList.description;
-    }
-  });
 
   return (
     <section>
@@ -88,7 +87,7 @@ function ArticlesList() {
       </div>
       <div className="pagination-line">
         <PaginationLine
-          pageCount={Math.ceil(articlesCount / limit)}
+          pageCount={Math.ceil(articlesData.total_count / limit)}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
           queries={queries}
@@ -96,7 +95,7 @@ function ArticlesList() {
         />
       </div>
       <div className="titles-container">
-        {articles.map((article) => {
+        {articlesData.articles.map((article) => {
           return (
             <Link
               to={`/articles/${article.article_id}`}
@@ -109,7 +108,7 @@ function ArticlesList() {
       </div>
       <div className="pagination-line">
         <PaginationLine
-          pageCount={Math.ceil(articlesCount / limit)}
+          pageCount={Math.ceil(articlesData.total_count / limit)}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
           queries={queries}
