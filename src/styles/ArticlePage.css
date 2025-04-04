@@ -11,7 +11,7 @@ article p {
 
 .article-info {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: auto auto;
 }
 
 .voting-container {
@@ -30,4 +30,9 @@ article p {
 .likes-indicator {
   font-size: 1.5em;
   margin: 0;
+}
+
+.comment-count {
+  font-size: 0.5em;
+  align-self: center;
 }

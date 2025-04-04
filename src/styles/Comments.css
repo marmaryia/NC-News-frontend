@@ -7,11 +7,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
 .comment-view-button {
   align-self: center;
   width: 100%;
   padding: 1em;
   font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.more-comments-button {
+  float: right;
+  padding: 0.5em;
+
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -45,6 +54,7 @@
 .delete-comment-button:hover {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
 .comment-delete-message {
   text-align: end;
   font-style: italic;

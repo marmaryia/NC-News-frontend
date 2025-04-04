@@ -1,10 +1,12 @@
 .title-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto;
   margin: 2rem;
   background-color: var(--secondary);
   border-radius: 10px;
   transition: 0.2s;
+  padding: 1em;
 }
 
 .title-card:hover {
@@ -12,10 +14,37 @@
 }
 
 .title {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column: 1/5;
+  grid-row: 2;
 }
 
+.votes,
+.topic,
+.author,
 .date {
-  align-self: center;
+  font-style: italic;
+}
+
+@media only screen and (max-width: 600px) {
+  .title-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .title {
+    grid-row: 2;
+  }
+
+  .topic,
+  .author {
+    grid-row: 3;
+    text-align: start;
+  }
+
+  .date,
+  .votes {
+    grid-row: 1;
+    text-align: start;
+  }
 }

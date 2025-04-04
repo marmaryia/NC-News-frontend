@@ -34,11 +34,12 @@ function ArticlesSorting({
   }
 
   return (
-    <Stack direction="row" spacing={3} className="sorting-container">
+    <Stack direction="row" spacing={3}>
       <ToggleButtonGroup
         value={queries.sort_by}
         exclusive
         onChange={handleQuery}
+        aria-label="Platform"
       >
         <ToggleButton value="created_at">Date</ToggleButton>
         <ToggleButton value="comment_count">Comment count</ToggleButton>
@@ -49,11 +50,12 @@ function ArticlesSorting({
         value={queries.order}
         exclusive
         onChange={handleDirection}
+        aria-label="Platform"
       >
-        <ToggleButton value="desc">
+        <ToggleButton value="desc" name="descending">
           <ArrowDownwardRoundedIcon />
         </ToggleButton>
-        <ToggleButton value="asc">
+        <ToggleButton value="asc" name="ascending">
           <ArrowUpwardRoundedIcon />
         </ToggleButton>
       </ToggleButtonGroup>

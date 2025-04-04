@@ -9,7 +9,11 @@ function LoadMoreComments({ article_id, setComments, p }) {
     });
   }
 
-  return <button onClick={handleLoadMore}>More comments</button>;
+  return (
+    <button className="more-comments-button" onClick={handleLoadMore}>
+      More comments
+    </button>
+  );
 }
 
 export default LoadMoreComments;

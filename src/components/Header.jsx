@@ -11,7 +11,11 @@ function Header() {
       <section className="top-level-section">
         <nav>
           <Link to={"/"}>
-            <img className="logo" src="/logo.png" alt="logo" />
+            <img
+              className="logo"
+              src="src/visuals/logo.png"
+              alt="NC News logo"
+            />
           </Link>
 
           <Link to={"/?topic=coding"} className="header-link">
@@ -26,13 +30,11 @@ function Header() {
           </Link>
         </nav>
         <Link className="login" to="/login">
-          <p>
-            {loggedInUser.username ? (
-              <UserAvatar user={loggedInUser} />
-            ) : (
-              "Login"
-            )}
-          </p>
+          {loggedInUser.username ? (
+            <UserAvatar user={loggedInUser} />
+          ) : (
+            <p>Login</p>
+          )}
         </Link>
       </section>
     </header>

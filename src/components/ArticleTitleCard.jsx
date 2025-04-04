@@ -5,10 +5,12 @@ function ArticleTitleCard({ article }) {
       <p className="date">
         {String(new Date(article.created_at)).split("+")[0]}
       </p>
-      <p>By: {article.author}</p>
-      <p>On: {article.topic}</p>
-      <p>
-        📑 {article.comment_count} | ❤️ {article.votes}
+      <p className="topic">
+        {article.topic[0].toUpperCase() + article.topic.slice(1)}
+      </p>
+      <p className="author">By: {article.author}</p>
+      <p className="votes">
+        📑 {article.comment_count} ❤️ {article.votes}
       </p>
     </div>
   );

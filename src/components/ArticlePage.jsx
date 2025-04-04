@@ -40,18 +40,23 @@ function ArticlePage() {
   return (
     <section className="top-level-section">
       <article>
-        <h1>{article.title}</h1>
-        <img src={article.article_img_url} alt={article.title} />
         <div className="article-info">
           <p className="left-align-italics">
             {String(new Date(article.created_at)).split("+")[0]}
           </p>
-          <p className="right-align-italics">Topic: {article.topic}</p>
+          <p className="right-align-italics">
+            {article.topic[0].toUpperCase() + article.topic.slice(1)}
+          </p>
         </div>
+        <h1>
+          {article.title}{" "}
+          <span className="comment-count">📑 {commentCount}</span>
+        </h1>
+        <img src={article.article_img_url} alt={article.title} />
         <p className="left-align">{article.body}</p>
-        <p className="right-align-italics">By: {article.author}</p>
-        <p>📑 {commentCount}</p>
+        <p className="right-align-italics">By {article.author}</p>
       </article>
+
       <Voting id={article_id} setLikesCount={setLikesCount}>
         <p className="likes-indicator">❤️ {likesCount}</p>
       </Voting>

@@ -23,6 +23,13 @@ header section {
   width: inherit;
 }
 
+@media only screen and (max-width: 600px) {
+  header section {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
 footer {
   margin-top: 2em;
   grid-row: 3/4;
@@ -36,6 +43,7 @@ nav {
 
 .login {
   justify-self: end;
+  margin: 1em;
 }
 
 .logo {
@@ -44,6 +52,7 @@ nav {
   transition: 300ms;
   border-radius: 5px;
   justify-self: start;
+  margin: 1em;
 }
 
 .logo:hover {
