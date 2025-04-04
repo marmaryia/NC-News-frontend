@@ -15,7 +15,7 @@ function LoginPage() {
 
   if (loggedInUser.username) {
     return (
-      <section className="top-level-section">
+      <section className="vertically-centered-section">
         <h1>Logged in as</h1>
         <h2>{loggedInUser.username}</h2>
         <p>(aka {loggedInUser.name})</p>
@@ -26,7 +26,7 @@ function LoginPage() {
     );
   }
   return (
-    <section>
+    <section className="vertically-centered-section">
       <h1>Select your today’s persona</h1>
       <div className="user-container">
         <LoginForm />

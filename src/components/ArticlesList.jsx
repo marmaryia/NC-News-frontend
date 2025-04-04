@@ -108,6 +108,7 @@ function ArticlesList() {
           setQueries={setQueries}
         />
       </div>
+
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -124,6 +125,7 @@ function ArticlesList() {
           })}
         </div>
       )}
+
       <div className="pagination-line">
         <PaginationLine
           pageCount={Math.ceil(articlesData.total_count / limit)}

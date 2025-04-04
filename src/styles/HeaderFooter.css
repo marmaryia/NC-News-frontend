@@ -12,6 +12,10 @@ footer {
   flex-wrap: wrap;
 }
 
+header {
+  grid-row: 1/2;
+}
+
 header section {
   display: grid;
   grid-template-columns: 60% 40%;
@@ -21,6 +25,7 @@ header section {
 
 footer {
   margin-top: 2em;
+  grid-row: 3/4;
 }
 
 nav {
@@ -54,8 +59,4 @@ nav {
 
 .header-link:hover {
   padding: 1em;
-}
-
-.avatar {
-  border: double;
 }
