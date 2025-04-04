@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllArticles, getAllTopics } from "../api";
 import { Link, useSearchParams } from "react-router-dom";
 import ArticleTitleCard from "./ArticleTitleCard";
@@ -7,6 +7,8 @@ import ArticlesFilter from "./ArticlesFilter";
 import ArticlesSorting from "./ArticlesSorting";
 import useApiRequest from "../useApiRequest";
 import Error from "./Error";
+import "../styles/ArticlesList.css";
+import "../styles/ArticlesControl.css";
 
 function ArticlesList() {
   const [articlesData, setArticlesData] = useState({});
@@ -70,16 +72,12 @@ function ArticlesList() {
     });
   }, [searchParams, topicsList]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   if (error || topicsError) {
     return <Error error={error || topicsError} />;
   }
 
   return (
-    <section>
+    <section className="top-level-section">
       <h1>{topicDescription ? topicDescription : "Everything"}</h1>
       <div className="articles-nav-bar">
         <div className="articles-filter">
@@ -110,18 +108,22 @@ function ArticlesList() {
           setQueries={setQueries}
         />
       </div>
-      <div className="titles-container">
-        {articlesData.articles.map((article) => {
-          return (
-            <Link
-              to={`/articles/${article.article_id}`}
-              key={article.article_id}
-            >
-              <ArticleTitleCard article={article} />
-            </Link>
-          );
-        })}
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="titles-container">
+          {articlesData.articles.map((article) => {
+            return (
+              <Link
+                to={`/articles/${article.article_id}`}
+                key={article.article_id}
+              >
+                <ArticleTitleCard article={article} />
+              </Link>
+            );
+          })}
+        </div>
+      )}
       <div className="pagination-line">
         <PaginationLine
           pageCount={Math.ceil(articlesData.total_count / limit)}

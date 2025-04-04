@@ -1,0 +1,51 @@
+.comment {
+  border-bottom: solid 1px;
+  font-size: 1.2em;
+}
+
+.comment-top-line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.comment-view-button {
+  align-self: center;
+  width: 100%;
+  padding: 1em;
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.comment-body-input {
+  width: 100%;
+  padding: 1em;
+}
+
+.new-comment-form {
+  display: grid;
+  justify-items: start;
+}
+.new-comment-form label {
+  align-self: start;
+}
+.submit-button {
+  justify-self: end;
+}
+
+.delete-comment-button {
+  justify-self: end;
+  align-self: center;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 1.5em;
+  background-color: transparent;
+}
+
+.delete-comment-button:hover {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.comment-delete-message {
+  text-align: end;
+  font-style: italic;
+}

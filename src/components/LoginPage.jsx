@@ -15,7 +15,7 @@ function LoginPage() {
 
   if (loggedInUser.username) {
     return (
-      <section>
+      <section className="top-level-section">
         <h1>Logged in as</h1>
         <h2>{loggedInUser.username}</h2>
         <p>(aka {loggedInUser.name})</p>

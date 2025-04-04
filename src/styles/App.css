@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.top-level-section {
+  width: 70%;
+  justify-self: center;
+}
+
+img {
+  max-width: 70vw;
+}
+
+select {
+  padding: 1em;
+}
+
+.right-align-italics {
+  text-align: end;
+  font-style: italic;
+}
+
+.left-align-italics {
+  text-align: start;
+  font-style: italic;
+}
+
+.right-align {
+  text-align: end;
+}
+
+.left-align {
+  text-align: start;
+}
+
+.login-form {
+  justify-self: center;
+  display: grid;
+  width: 60%;
+  grid-template-columns: 1fr;
+  justify-content: space-around;
+  row-gap: 1em;
+}

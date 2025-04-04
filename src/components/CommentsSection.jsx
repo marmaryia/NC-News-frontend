@@ -3,6 +3,7 @@ import NewCommentForm from "./NewCommentForm";
 import CommentCard from "./CommentCard";
 import LoadMoreComments from "./LoadMoreComments";
 import useApiRequest from "../useApiRequest";
+import "../styles/Comments.css";
 
 function CommentsSection({ article_id, commentCount, setCommentCount }) {
   const {

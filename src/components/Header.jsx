@@ -1,24 +1,40 @@
 import { Link } from "react-router-dom";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { useContext } from "react";
+import "../styles/HeaderFooter.css";
+import UserAvatar from "./UserIcon";
 
 function Header() {
   const { loggedInUser } = useContext(LoggedInUserContext);
   return (
     <header>
-      <Link to={"/"}>
-        <img className="logo" src="/logo.png" alt="logo" />
-      </Link>
+      <section className="top-level-section">
+        <nav>
+          <Link to={"/"}>
+            <img className="logo" src="/logo.png" alt="logo" />
+          </Link>
 
-      <Link to={"/?topic=coding"}> Coding </Link>
-      <Link to={"/?topic=football"}> Football </Link>
-      <Link to={"/?topic=cooking"}> Cooking </Link>
+          <Link to={"/?topic=coding"} className="header-link">
+            Coding
+          </Link>
 
-      <Link to="/login">
-        <p className="login">
-          {loggedInUser.username ? loggedInUser.username : "Login"}
-        </p>
-      </Link>
+          <Link to={"/?topic=football"} className="header-link">
+            Football
+          </Link>
+          <Link to={"/?topic=cooking"} className="header-link">
+            Cooking
+          </Link>
+        </nav>
+        <Link className="login" to="/login">
+          <p>
+            {loggedInUser.username ? (
+              <UserAvatar user={loggedInUser} />
+            ) : (
+              "Login"
+            )}
+          </p>
+        </Link>
+      </section>
     </header>
   );
 }

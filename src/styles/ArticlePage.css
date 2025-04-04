@@ -1,0 +1,27 @@
+article {
+  background-color: var(--secondary);
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+}
+
+article p {
+  font-size: 1.5em;
+}
+
+.article-info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.voting-container {
+  margin-top: 1em;
+  display: flex;
+  justify-content: end;
+  gap: 1em;
+}
+
+.voting-button {
+  font-size: 1.1em;
+  background-color: var(--tertiary);
+}

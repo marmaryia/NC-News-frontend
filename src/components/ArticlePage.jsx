@@ -5,6 +5,7 @@ import CommentsSection from "./CommentsSection";
 import Voting from "./Voting";
 import useApiRequest from "../useApiRequest";
 import Error from "./Error";
+import "../styles/ArticlePage.css";
 
 function ArticlePage() {
   const { article_id } = useParams();
@@ -37,7 +38,7 @@ function ArticlePage() {
   }
 
   return (
-    <section>
+    <section className="top-level-section">
       <article>
         <h1>{article.title}</h1>
         <img src={article.article_img_url} alt={article.title} />
