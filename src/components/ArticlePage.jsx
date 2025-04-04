@@ -6,6 +6,7 @@ import Voting from "./Voting";
 import useApiRequest from "../useApiRequest";
 import Error from "./Error";
 import "../styles/ArticlePage.css";
+import LoadingAnimation from "./LoadingAnimation";
 
 function ArticlePage() {
   const { article_id } = useParams();
@@ -30,7 +31,7 @@ function ArticlePage() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingAnimation />;
   }
 
   if (error) {

@@ -4,6 +4,7 @@ import CommentCard from "./CommentCard";
 import LoadMoreComments from "./LoadMoreComments";
 import useApiRequest from "../useApiRequest";
 import "../styles/Comments.css";
+import LoadingAnimation from "./LoadingAnimation";
 
 function CommentsSection({ article_id, commentCount, setCommentCount }) {
   const {
@@ -14,7 +15,11 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
   } = useApiRequest(getCommentsByArticleId, article_id, 1);
 
   if (isLoading) {
-    return <section className="comments-container">Loading...</section>;
+    return (
+      <section className="comments-container">
+        <LoadingAnimation />
+      </section>
+    );
   }
 
   return (

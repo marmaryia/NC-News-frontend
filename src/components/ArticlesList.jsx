@@ -9,6 +9,7 @@ import useApiRequest from "../useApiRequest";
 import Error from "./Error";
 import "../styles/ArticlesList.css";
 import "../styles/ArticlesControl.css";
+import LoadingAnimation from "./LoadingAnimation";
 
 function ArticlesList() {
   const [articlesData, setArticlesData] = useState({});
@@ -110,7 +111,7 @@ function ArticlesList() {
       </div>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <LoadingAnimation />
       ) : (
         <div className="titles-container">
           {articlesData.articles.map((article) => {

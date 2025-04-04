@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { getAllUsers } from "../api";
 import useApiRequest from "../useApiRequest";
+import LoadingAnimation from "./LoadingAnimation";
+import Error from "./Error";
 
 function LoginForm() {
   const [selectedUser, setSelectedUser] = useState();
@@ -25,7 +27,9 @@ function LoginForm() {
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }, [loggedInUser]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingAnimation />;
+
+  if (error) return <Error />;
 
   return (
     <form
