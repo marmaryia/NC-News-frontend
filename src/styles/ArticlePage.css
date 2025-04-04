@@ -23,5 +23,11 @@ article p {
 
 .voting-button {
   font-size: 1.1em;
-  background-color: var(--tertiary);
+  background-color: var(--secondary);
+  padding: 0.5em;
+}
+
+.likes-indicator {
+  font-size: 1.5em;
+  margin: 0;
 }

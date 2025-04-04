@@ -50,11 +50,11 @@ function ArticlePage() {
         </div>
         <p className="left-align">{article.body}</p>
         <p className="right-align-italics">By: {article.author}</p>
-        <p>
-          📑 {commentCount} | ❤️ {likesCount}
-        </p>
+        <p>📑 {commentCount}</p>
       </article>
-      <Voting id={article_id} setLikesCount={setLikesCount} />
+      <Voting id={article_id} setLikesCount={setLikesCount}>
+        <p className="likes-indicator">❤️ {likesCount}</p>
+      </Voting>
       <button className="comment-view-button" onClick={handleShowingComments}>
         {showComments ? "Hide comments" : "View comments"}
       </button>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { patchLikesCount } from "../api";
 
-function Voting({ id, setLikesCount }) {
+function Voting({ id, setLikesCount, children }) {
   const [error, setError] = useState(false);
 
   function handleVote(e) {
@@ -18,10 +18,11 @@ function Voting({ id, setLikesCount }) {
     <>
       <div className="voting-container">
         <button className="voting-button" onClick={handleVote} value={1}>
-          + 1 ❤️
+          ➕
         </button>
+        {children}
         <button className="voting-button" onClick={handleVote} value={-1}>
-          – 1 ❤️
+          ➖
         </button>
       </div>
       {error ? <p className="right-align">{error}</p> : null}
