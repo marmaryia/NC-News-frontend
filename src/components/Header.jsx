@@ -11,11 +11,7 @@ function Header() {
       <section className="top-level-section">
         <nav>
           <Link to={"/"}>
-            <img
-              className="logo"
-              src="src/visuals/logo.png"
-              alt="NC News logo"
-            />
+            <img className="logo" src="/logo.png" alt="NC News logo" />
           </Link>
 
           <Link to={"/?topic=coding"} className="header-link">
