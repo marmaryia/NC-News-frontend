@@ -31,16 +31,20 @@ function CommentsSection({ article_id, commentCount, setCommentCount }) {
           setComments={setComments}
         />
       }
-      {comments.map((comment) => {
-        return (
-          <CommentCard
-            key={comment.comment_id}
-            comment={comment}
-            setCommentCount={setCommentCount}
-            setComments={setComments}
-          />
-        );
-      })}
+      {comments.length === 0 ? (
+        <p>There are no comments here yet.</p>
+      ) : (
+        comments.map((comment) => {
+          return (
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              setCommentCount={setCommentCount}
+              setComments={setComments}
+            />
+          );
+        })
+      )}
       {comments.length < commentCount ? (
         <LoadMoreComments
           article_id={article_id}
