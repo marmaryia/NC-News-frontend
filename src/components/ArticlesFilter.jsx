@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -31,11 +30,11 @@ export default function ArticlesFilter({
   if (topicsAreLoading) return <div>Loading...</div>;
 
   return (
-    <FormControl sx={{ minWidth: 120 }}>
-      <InputLabel id="demo-simple-select-label">Topic</InputLabel>
+    <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id="select-label">Topic</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
+        labelId="select-label"
+        id="select"
         value={queries.topic}
         label="Topic"
         onChange={handleChange}

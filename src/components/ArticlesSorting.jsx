@@ -3,6 +3,10 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
+import { useState } from "react";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 function ArticlesSorting({
   searchParams,
@@ -10,6 +14,13 @@ function ArticlesSorting({
   queries,
   setQueries,
 }) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", updateWidth);
+
+  function updateWidth() {
+    setWindowWidth(window.innerWidth);
+  }
+
   function handleQuery(event, newSortQuery) {
     if (newSortQuery !== null) {
       setQueries((current) => {
@@ -42,9 +53,16 @@ function ArticlesSorting({
         onChange={handleQuery}
         aria-label="Platform"
       >
-        <ToggleButton value="created_at">Date</ToggleButton>
-        <ToggleButton value="comment_count">Comments</ToggleButton>
-        <ToggleButton value="votes">Votes</ToggleButton>
+        <ToggleButton value="created_at">
+          <CalendarMonthIcon />
+          {windowWidth > 750 ? " Date" : ""}
+        </ToggleButton>
+        <ToggleButton value="comment_count">
+          <CommentOutlinedIcon /> {windowWidth > 750 ? " Comments" : ""}
+        </ToggleButton>
+        <ToggleButton value="votes">
+          <FavoriteBorderOutlinedIcon /> {windowWidth > 750 ? " Votes" : ""}
+        </ToggleButton>
       </ToggleButtonGroup>
 
       <ToggleButtonGroup
