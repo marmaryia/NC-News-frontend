@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from "../api";
+import { getArticleById, patchArticleLikesCount } from "../api";
 import { useParams } from "react-router-dom";
 import CommentsSection from "./CommentsSection";
 import Voting from "./Voting";
@@ -58,7 +58,11 @@ function ArticlePage() {
         <p className="right-align-italics">By {article.author}</p>
       </article>
 
-      <Voting id={article_id} setLikesCount={setLikesCount}>
+      <Voting
+        id={article_id}
+        setLikesCount={setLikesCount}
+        apiFunction={patchArticleLikesCount}
+      >
         <p className="likes-indicator">❤️ {likesCount}</p>
       </Voting>
       <button className="comment-view-button" onClick={handleShowingComments}>

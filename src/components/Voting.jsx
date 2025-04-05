@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { patchLikesCount } from "../api";
 
-function Voting({ id, setLikesCount, children }) {
+function Voting({ id, setLikesCount, apiFunction, children }) {
   const [error, setError] = useState(false);
   const [remainingVotes, setRemainingVotes] = useState({ up: 1, down: 1 });
 
@@ -14,7 +13,7 @@ function Voting({ id, setLikesCount, children }) {
     });
 
     setLikesCount((currentLikes) => currentLikes + vote);
-    patchLikesCount(id, vote).catch((err) => {
+    apiFunction(id, vote).catch((err) => {
       setLikesCount((currentLikesCount) => currentLikesCount - vote);
       setError("An error occurred. Please try again later");
       setRemainingVotes((current) => {
