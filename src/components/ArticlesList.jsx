@@ -31,7 +31,7 @@ function ArticlesList() {
     order: searchParams.get("order") || "desc",
   });
 
-  const limit = searchParams.get("limit") || 10;
+  const limit = 10;
 
   useEffect(() => {
     const p = searchParams.get("p");

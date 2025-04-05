@@ -9,11 +9,10 @@ function Header() {
   return (
     <header>
       <section className="top-level-section">
+        <Link to={"/"}>
+          <img className="logo" src="/logo.png" alt="NC News logo" />
+        </Link>
         <nav>
-          <Link to={"/"}>
-            <img className="logo" src="/logo.png" alt="NC News logo" />
-          </Link>
-
           <Link to={"/?topic=coding"} className="header-link">
             Coding
           </Link>
