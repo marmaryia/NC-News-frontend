@@ -25,6 +25,7 @@ body {
   --tertiary: #6246ea;
   --text-colour: #2b2c34;
   --secondary-text-colour: #fffffe;
+  --disabled-button-colour: #6146ea46;
   margin: 0;
   display: flex;
   place-items: start;
@@ -51,6 +52,12 @@ button {
   transition: background-color 0.5s;
 }
 
-button:hover {
+button:hover:not([disabled]) {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+button:disabled,
+button[disabled] {
+  opacity: 0.66;
+  color: var(--primary);
 }
