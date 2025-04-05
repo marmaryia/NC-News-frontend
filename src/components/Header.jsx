@@ -14,21 +14,21 @@ function Header() {
         </Link>
         <nav>
           <Link to={"/?topic=coding"} className="header-link">
-            Coding
+            CODING
           </Link>
 
           <Link to={"/?topic=football"} className="header-link">
-            Football
+            FOOTBALL
           </Link>
           <Link to={"/?topic=cooking"} className="header-link">
-            Cooking
+            COOKING
           </Link>
         </nav>
         <Link className="login" to="/login">
           {loggedInUser.username ? (
             <UserAvatar user={loggedInUser} />
           ) : (
-            <p>Login</p>
+            <p>LOGIN</p>
           )}
         </Link>
       </section>

@@ -15,6 +15,10 @@ function ArticlesSorting({
       setQueries((current) => {
         return { ...current, sort_by: newSortQuery };
       });
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set("sort_by", newSortQuery);
+
+      setSearchParams(newParams);
     }
   }
 
@@ -23,14 +27,11 @@ function ArticlesSorting({
       setQueries((current) => {
         return { ...current, order: newSortDirection };
       });
-    }
-  }
+      const newParams = new URLSearchParams(searchParams);
 
-  function handleSubmit() {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("sort_by", queries.sort_by);
-    newParams.set("order", queries.order);
-    setSearchParams(newParams);
+      newParams.set("order", newSortDirection);
+      setSearchParams(newParams);
+    }
   }
 
   return (
@@ -42,7 +43,7 @@ function ArticlesSorting({
         aria-label="Platform"
       >
         <ToggleButton value="created_at">Date</ToggleButton>
-        <ToggleButton value="comment_count">Comment count</ToggleButton>
+        <ToggleButton value="comment_count">Comments</ToggleButton>
         <ToggleButton value="votes">Votes</ToggleButton>
       </ToggleButtonGroup>
 
@@ -58,10 +59,6 @@ function ArticlesSorting({
         <ToggleButton value="asc" name="ascending">
           <ArrowUpwardRoundedIcon />
         </ToggleButton>
-      </ToggleButtonGroup>
-
-      <ToggleButtonGroup>
-        <ToggleButton onClick={handleSubmit}>Sort</ToggleButton>
       </ToggleButtonGroup>
     </Stack>
   );

@@ -23,7 +23,7 @@ header section {
   width: inherit;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
   header section {
     display: grid;
     grid-template-rows: auto auto;
@@ -33,6 +33,8 @@ header section {
   nav {
     grid-row: 2/3;
     grid-column: 1/3;
+    display: flex;
+    justify-content: space-between;
   }
 
   .logo {
@@ -55,8 +57,7 @@ footer {
 
 nav {
   display: flex;
-  justify-content: center;
-  gap: 5em;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -78,11 +79,9 @@ nav {
 
 .header-link {
   padding: 0.7em;
-  border-top: double;
-  border-bottom: double;
   border-radius: 1em;
 }
 
 .header-link:hover {
-  padding: 1em;
+  border-bottom: 1px solid;
 }

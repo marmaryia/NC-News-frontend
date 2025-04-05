@@ -31,26 +31,24 @@ export default function ArticlesFilter({
   if (topicsAreLoading) return <div>Loading...</div>;
 
   return (
-    <Box sx={{ width: 120 }}>
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">Topic</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={queries.topic}
-          label="Topic"
-          onChange={handleChange}
-        >
-          <MenuItem value="Everything">Everything</MenuItem>
-          {topicsList.map((topicObj) => {
-            return (
-              <MenuItem key={topicObj.slug} value={topicObj.slug}>
-                {topicObj.slug[0].toUpperCase() + topicObj.slug.slice(1)}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl sx={{ minWidth: 120 }}>
+      <InputLabel id="demo-simple-select-label">Topic</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={queries.topic}
+        label="Topic"
+        onChange={handleChange}
+      >
+        <MenuItem value="Everything">Everything</MenuItem>
+        {topicsList.map((topicObj) => {
+          return (
+            <MenuItem key={topicObj.slug} value={topicObj.slug}>
+              {topicObj.slug[0].toUpperCase() + topicObj.slug.slice(1)}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 }
