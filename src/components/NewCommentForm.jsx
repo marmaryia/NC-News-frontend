@@ -9,6 +9,7 @@ function NewCommentForm({ article_id, setCommentCount, setComments }) {
   const { loggedInUser } = useContext(LoggedInUserContext);
 
   function handleChange(e) {
+    setMessage("");
     setCommentText(e.target.value);
   }
 
@@ -24,6 +25,9 @@ function NewCommentForm({ article_id, setCommentCount, setComments }) {
       })
       .catch(() => {
         setMessage("Something went wrong");
+      })
+      .finally(() => {
+        setTimeout(setMessage, 2000, "");
       });
   }
 
