@@ -1,6 +1,5 @@
 .pagination-line {
   justify-self: end;
-  margin-right: 2em;
 }
 
 .articles-nav-bar {
@@ -8,18 +7,8 @@
   grid-template-rows: 1fr;
   grid-template-columns: auto auto;
   align-items: center;
-
   margin-bottom: 1em;
-  margin-right: 2em;
-  margin-left: 2em;
 }
-
-/* @media only screen and (max-width: 600px) {
-  .articles-nav-bar {
-    /* flex-direction: column;
-    justify-content: start; 
-  }
-} */
 
 .articles-filter {
   justify-self: start;

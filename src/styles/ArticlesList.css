@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-template-columns: auto auto;
-  margin: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   background-color: var(--secondary);
   border-radius: 10px;
   transition: 0.2s;
@@ -30,6 +31,8 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
   }
 
   .title {
@@ -45,6 +48,16 @@
   .date,
   .votes {
     grid-row: 1;
+    text-align: start;
+  }
+
+  .votes,
+  .author {
+    text-align: end;
+  }
+
+  .date,
+  .topic {
     text-align: start;
   }
 }
