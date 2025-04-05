@@ -49,7 +49,7 @@ function ArticlePage() {
             {article.topic[0].toUpperCase() + article.topic.slice(1)}
           </p>
         </div>
-        <h1>
+        <h1 className="article-headline">
           {article.title}{" "}
           <span className="comment-count">📑 {commentCount}</span>
         </h1>

@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
-import { deleteComment } from "../api";
+import { deleteComment, patchCommentLikesCount } from "../api";
+import Voting from "./Voting";
 
 function CommentCard({ comment, setCommentCount, setComments }) {
   const { loggedInUser } = useContext(LoggedInUserContext);
   const [message, setMessage] = useState("");
+  const [likesCount, setLikesCount] = useState(0);
 
   function handleClick() {
     setMessage("Deleting...");
@@ -30,6 +32,10 @@ function CommentCard({ comment, setCommentCount, setComments }) {
       });
   }
 
+  useEffect(() => {
+    setLikesCount(comment.votes);
+  }, []);
+
   return (
     <div className="comment" key={comment.comment_id}>
       <div className="comment-top-line">
@@ -50,7 +56,13 @@ function CommentCard({ comment, setCommentCount, setComments }) {
       <div className="comment-delete-message">{message}</div>
 
       <p className="right-align"> {comment.body}</p>
-      <p className="right-align"> ❤️ {comment.votes} </p>
+      <Voting
+        id={comment.comment_id}
+        setLikesCount={setLikesCount}
+        apiFunction={patchCommentLikesCount}
+      >
+        <p className="comment-likes-indicator"> ❤️ {likesCount}</p>
+      </Voting>
     </div>
   );
 }

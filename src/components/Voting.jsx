@@ -25,6 +25,7 @@ function Voting({ id, setLikesCount, apiFunction, children }) {
   return (
     <>
       <div className="voting-container">
+        {error ? <p className="voting-error-message">{error}</p> : null}
         <button
           className="voting-button"
           onClick={handleVote}
@@ -43,7 +44,6 @@ function Voting({ id, setLikesCount, apiFunction, children }) {
           ➕
         </button>
       </div>
-      {error ? <p className="right-align">{error}</p> : null}
     </>
   );
 }

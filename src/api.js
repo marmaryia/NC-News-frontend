@@ -37,6 +37,14 @@ export function patchArticleLikesCount(article_id, vote) {
     });
 }
 
+export function patchCommentLikesCount(comment_id, vote) {
+  return apiClient
+    .patch(`/comments/${comment_id}`, { inc_votes: vote })
+    .then(({ data: { comment } }) => {
+      return comment;
+    });
+}
+
 export function getAllUsers() {
   return apiClient.get("/users").then(({ data: { users } }) => {
     return users;

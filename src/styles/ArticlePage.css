@@ -5,6 +5,10 @@ article {
   border-radius: 1em;
 }
 
+.article-headline {
+  margin-top: 0.1em;
+}
+
 article p {
   font-size: 1.5em;
 }
@@ -18,7 +22,9 @@ article p {
   margin-top: 1em;
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 1em;
+  font-size: 0.9rem;
 }
 
 .voting-button {
@@ -27,8 +33,15 @@ article p {
   padding: 0.5em;
 }
 
-.likes-indicator {
-  font-size: 1.5em;
+.likes-indicator,
+.voting-error-message {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.voting-error-message {
+  font-size: 1rem;
+  font-style: italic;
   margin: 0;
 }
 

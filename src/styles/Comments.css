@@ -1,11 +1,18 @@
 .comment {
   border-bottom: solid 1px;
   font-size: 1.2em;
+  padding-bottom: 0.5em;
 }
 
 .comment-top-line {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
+  align-content: center;
+  margin-top: 0.5em;
+}
+
+.comment-top-line p {
+  margin: 0;
 }
 
 .comment-view-button {
@@ -20,7 +27,6 @@
 .more-comments-button {
   float: right;
   padding: 0.5em;
-
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -58,4 +64,9 @@
 .comment-delete-message {
   text-align: end;
   font-style: italic;
+}
+
+.comment-likes-indicator {
+  font-size: 1.3rem;
+  margin: 0;
 }
