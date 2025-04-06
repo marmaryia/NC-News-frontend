@@ -33,6 +33,6 @@ To run locally, clone the repository and navigate to the directory, then in the 
 - npm install (to install react, react-dom and dependencies);
 - npm run dev (to serve the app).
 
-## Post scriptum
+## Acknowledment
 
 This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/).

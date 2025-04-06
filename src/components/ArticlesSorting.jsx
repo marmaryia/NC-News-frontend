@@ -46,7 +46,7 @@ function ArticlesSorting({
   }
 
   return (
-    <Stack direction="row" spacing={3}>
+    <Stack direction="row" spacing={1}>
       <ToggleButtonGroup
         value={queries.sort_by}
         exclusive

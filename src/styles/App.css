@@ -20,10 +20,30 @@
   align-self: start;
 }
 
+.tech-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.features-list {
+  list-style-position: inside;
+  width: 75%;
+  justify-self: center;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .top-level-section {
     width: 100%;
     padding: 1em;
+  }
+
+  .features-list {
+    width: 100%;
   }
 }
 
