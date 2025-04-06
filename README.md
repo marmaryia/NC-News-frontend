@@ -12,7 +12,7 @@ The backend API: https://github.com/marmaryia/NC-News-backend
 
 - JavaScript, CSS & HTML
 - React
-- MUI component library
+- Component libraries: MUI, Lottie-React
 
 ## Features
 
