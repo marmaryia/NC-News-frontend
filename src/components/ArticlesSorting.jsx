@@ -3,7 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -15,7 +15,11 @@ function ArticlesSorting({
   setQueries,
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  window.addEventListener("resize", updateWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   function updateWidth() {
     setWindowWidth(window.innerWidth);
