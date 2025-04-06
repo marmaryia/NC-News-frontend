@@ -7,6 +7,7 @@ import useApiRequest from "../useApiRequest";
 import Error from "./Error";
 import "../styles/ArticlePage.css";
 import LoadingAnimation from "./LoadingAnimation";
+import formatDate from "../utils";
 
 function ArticlePage() {
   const { article_id } = useParams();
@@ -43,7 +44,8 @@ function ArticlePage() {
       <article>
         <div className="article-info">
           <p className="left-align-italics">
-            {String(new Date(article.created_at)).split("+")[0]}
+            {formatDate(article.created_at).day},{" "}
+            {formatDate(article.created_at).time}
           </p>
           <p className="right-align-italics">
             {article.topic[0].toUpperCase() + article.topic.slice(1)}

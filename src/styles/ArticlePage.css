@@ -16,6 +16,7 @@ article p {
 .article-info {
   display: grid;
   grid-template-columns: auto auto;
+  font-size: 0.9em;
 }
 
 .voting-container {

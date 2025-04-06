@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 import { deleteComment, patchCommentLikesCount } from "../api";
 import Voting from "./Voting";
+import formatDate from "../utils";
 
 function CommentCard({ comment, setCommentCount, setComments }) {
   const { loggedInUser } = useContext(LoggedInUserContext);
@@ -40,8 +41,8 @@ function CommentCard({ comment, setCommentCount, setComments }) {
     <div className="comment" key={comment.comment_id}>
       <div className="comment-top-line">
         <p className="left-align-italics">
-          {String(new Date(comment.created_at)).split("+")[0]}, {comment.author}
-          :
+          {formatDate(comment.created_at).day} (
+          {formatDate(comment.created_at).time}), {comment.author}:
         </p>
         {loggedInUser.username === comment.author ? (
           <button
