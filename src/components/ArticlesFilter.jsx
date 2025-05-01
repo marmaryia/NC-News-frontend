@@ -35,7 +35,7 @@ export default function ArticlesFilter({
       <Select
         labelId="select-label"
         id="select"
-        value={queries.topic}
+        value={queries.topic ? queries.topic : "Everything"}
         label="Topic"
         onChange={handleChange}
       >
