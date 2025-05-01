@@ -1,6 +1,6 @@
 import formatDate from "../utils";
 
-function ArticleTitleCard({ article }) {
+function ArticleTitleCard({ article, i }) {
   return (
     <div className="title-card">
       <h2 className="title">{article.title}</h2>
@@ -14,6 +14,9 @@ function ArticleTitleCard({ article }) {
         {article.comment_count} ❤️{"\u00A0"}
         {article.votes}
       </p>
+      {[0, 6].includes(i) ? (
+        <img src={article.article_img_url} className="title-image" />
+      ) : null}
     </div>
   );
 }
