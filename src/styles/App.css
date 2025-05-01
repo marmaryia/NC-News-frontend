@@ -15,7 +15,7 @@
 
 .top-level-section {
   grid-row: 2/3;
-  width: 65%;
+  width: 75%;
   justify-self: center;
   align-self: start;
 }
