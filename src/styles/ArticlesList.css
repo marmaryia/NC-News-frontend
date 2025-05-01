@@ -1,13 +1,14 @@
 .title-card {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-template-columns: auto auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  grid-template-rows: auto auto auto;
+
   background-color: var(--secondary);
   border-radius: 10px;
   transition: 0.2s;
   padding: 1em;
+  width: 100%;
+  height: 100%;
 }
 
 .title-card:hover {
@@ -63,4 +64,46 @@
     grid-column: 2;
     text-align: end;
   }
+}
+
+.headline {
+  grid-area: headline;
+}
+
+.titles-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "t0  . "
+    "t0  . "
+    "t0  . "
+    "t5  t5 "
+    ".  t6 "
+    ".  t6 "
+    ".  t6 "
+    "t9  t9";
+}
+.t0 {
+  grid-area: t0;
+}
+
+.t5 {
+  grid-area: t5;
+}
+
+.t6 {
+  grid-area: t6;
+}
+
+.t9 {
+  grid-area: t9;
+}
+
+.title-image {
+  width: 100%;
+  grid-row: 1/2;
+  grid-column: 1/5;
+  border-radius: 10px;
 }
