@@ -6,10 +6,10 @@ function Footer() {
       <section className="top-level-section">
         <Link to="/about">About</Link>
         <Link to="https://github.com/marmaryia/NC-News-frontend">
-          This project on Github
+          This project on GitHub
         </Link>
         <Link to="https://github.com/marmaryia/NC-News-backend">
-          Backend project on Github
+          Backend project on GitHub
         </Link>
       </section>
     </footer>
