@@ -114,13 +114,14 @@ function ArticlesList() {
         <LoadingAnimation />
       ) : (
         <div className="titles-container">
-          {articlesData.articles.map((article) => {
+          {articlesData.articles.map((article, i) => {
             return (
               <Link
                 to={`/articles/${article.article_id}`}
                 key={article.article_id}
+                className={`t${i}`}
               >
-                <ArticleTitleCard article={article} />
+                <ArticleTitleCard article={article} i={i} />
               </Link>
             );
           })}
