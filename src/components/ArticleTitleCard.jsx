@@ -10,7 +10,9 @@ function ArticleTitleCard({ article }) {
       </p>
       <p className="author">By: {article.author}</p>
       <p className="votes">
-        📑 {article.comment_count} ❤️ {article.votes}
+        📑{"\u00A0"}
+        {article.comment_count} ❤️{"\u00A0"}
+        {article.votes}
       </p>
     </div>
   );
